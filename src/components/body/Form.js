@@ -18,10 +18,17 @@ const Form = () => {
     const[blockid, setBlockid] = useState('');
 
     const[data, setData] = useState({
+        country: "",
+        state: "",
+        block: "",
+        land_size: "",
         userid: "",
         owner: "",
-        country: "",
-        state: ""
+        father_name: "",
+        valuation: "",
+        aadhar: "",
+        khatiyan_number: ""
+
 
     });
 
@@ -106,9 +113,13 @@ const Form = () => {
     }
 
     const handleblock = (e)=>{
-        const getBlockid = e.target.value;
+        const val_arr=e.target.value.split(",")
+        const getBlockid = val_arr[0];
         
         setBlockid(getBlockid);
+        data.block=val_arr[1]
+        const newData = {...data};
+        setData(newData);
     }
 
 // const [country, setCountry] = useState("")    
@@ -156,31 +167,34 @@ const Form = () => {
                 </select>
             </div>
 
-            {/* <div className={"input-field"}>
+            <div className={"input-field"}>
                 <label htmlFor = "block">Select Block</label>
                 <select id = 'block' name='block' className='form-control' onChange={(e)=>handleblock(e)}>
                     <option value="">--Select Block--</option>
                     {
                     block.map( (getblock,index)=>(
-                        <option value={getblock.block_id} key={index}>{getblock.block_name}</option> 
+                        <option id= "block" value={`${getblock.block_id},${getblock.block_name}`} key={index}>{getblock.block_name}</option> 
                     ))
                     }  
                 </select>
-            </div> */}
-
-
-            {/* <div className={"input-field"}>
-                <label htmlFor = "prevTransactionId">Previous Transaction Id</label>
-                <input 
-                    name="prevTransactionId"
-                    type="text" 
-                    placeholder="Enter Previous Transaction Id" 
-                    required>
-                </input>
-            </div> */}
+            </div>
 
             <div className={"input-field"}>
-                <label htmlFor = "userid">Id</label>
+                <label htmlFor = "land_size">Size of the Land</label>
+                <input 
+                    onChange={(e) => handleChange(e)}
+                    name="land_size"
+                    id="land_size"
+                    type="number" 
+                    placeholder="Enter size of land in Katta" 
+                    value={data.land_size}
+                    required>
+                </input>
+            </div>
+            
+
+            <div className={"input-field"}>
+                <label htmlFor = "userid">User Id</label>
                 <input 
                     onChange={(e) => handleChange(e)}
                     name="userid"
@@ -201,7 +215,58 @@ const Form = () => {
                     type="text" 
                     placeholder="Enter Name of the Owner" 
                     value = {data.name} 
-                    // onChange={handleInput}
+                    required>
+                </input>
+            </div>
+
+            <div className={"input-field"}>
+                <label htmlFor = "father_name">Father's Name of Owner</label>
+                <input 
+                    onChange={(e) => handleChange(e)}
+                    name="father_name"
+                    id="father_name"
+                    type="text" 
+                    placeholder="Enter Father's Name of the Owner" 
+                    value = {data.father_name} 
+                    required>
+                </input>
+            </div>
+
+            <div className={"input-field"}>
+                <label htmlFor = "valuation">Valuation</label>
+                <input 
+                    onChange={(e) => handleChange(e)}
+                    name="valuation"
+                    id="valuation"
+                    type="number" 
+                    placeholder="Enter valuation of the land" 
+                    value={data.valuation}
+                    required>
+                </input>
+            </div>
+
+            <div className={"input-field"}>
+                <label htmlFor = "aadhar">Aadhar Number</label>
+                <input 
+                    onChange={(e) => handleChange(e)}
+                    name="aadhar"
+                    id="aadhar"
+                    type="number" 
+                    placeholder="Enter Aadhar Number" 
+                    value={data.aadhar}
+                    required>
+                </input>
+            </div>
+
+            <div className={"input-field"}>
+                <label htmlFor = "khatiyan_number">Khatiyan Number</label>
+                <input 
+                    onChange={(e) => handleChange(e)}
+                    name="khatiyan_number"
+                    id="khatiyan_number"
+                    type="number" 
+                    placeholder="Enter Khatiyan Number of land" 
+                    value={data.khatiyan_number}
                     required>
                 </input>
             </div>
