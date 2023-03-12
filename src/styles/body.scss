@@ -1,0 +1,76 @@
+.wrapper {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+
+    .form, .form + div {
+        flex-basis: 100%;
+    }
+
+    .form {
+        padding-top: 5rem;
+        padding-bottom: 6rem;
+        height: 100vh;
+        width: 100%;
+        position: relative;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        &::after {
+            position: absolute;
+            height: 100vh;
+            right: 0;
+            content: "";
+            border-right: 1px solid rgb(209, 209, 209);
+        }
+
+        form {
+            width: 400px;
+            display: flex;
+            flex-direction: column;
+            margin-left: auto;
+            margin-right: auto;
+            .input-field {
+                text-align: left;
+                margin-bottom: 16px;
+                label {
+                    display: block;
+                    padding-bottom: 8px;
+                }
+                input{
+                    width: 100%;
+                    padding: 12px;
+                }
+                select{
+                    width: 107%;
+                    padding: 12px;
+                }
+            }
+
+            .submit-wrap {
+                margin-left: auto;
+                margin-top: 8px;
+                button {
+                    border: unset;
+                    background-color: $primary;
+                    padding: 12px 24px;
+                    color: $white;
+                    border-radius: 4px;
+                }
+            }
+        }
+    }
+
+    .form + div {
+    // > div {
+        height: 100vh;
+        display: flex;
+        width: 100%;
+
+        & > div {
+            width: 100%;
+            margin: auto;
+        }
+    }
+}
