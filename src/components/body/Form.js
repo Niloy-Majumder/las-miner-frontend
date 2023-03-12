@@ -21,13 +21,20 @@ const Form = () => {
         userid: "",
         owner: "",
         country: "",
+        state: ""
 
     });
 
     const handleSelect =(e) =>{
-        const newData = {...data};
-        newData[e.target.id] = e.target.value;
-        setData(newData);
+        // const val_arr=e.target.value.split(",")
+        // data.country=val_arr[1]
+        // console.log(data)
+        // const newData = {...data};
+        // console.log(newData)
+
+        // // newData[e.target.id] = e.target.value;
+        // console.log(newData)
+        // setData(newData);
     }
 
     const handleChange = (e) =>{
@@ -53,27 +60,49 @@ const Form = () => {
     
 
     const handlecounty=(e)=>{
-        const getcountryId = e.target.value;
+        const val_arr=e.target.value.split(",")
+        // console.log(typeof(e.target.value))
+        const getcountryId = val_arr[0];
+        // console.log(e.target.value);
+        // console.log(e.target.);
+        
         const getStatedata = countrydata.find(country=>country.country_id===getcountryId).states;
         setState(getStatedata);
         setCountryid(getcountryId);
+        data.country=val_arr[1]
+        // console.log(data)
+        const newData = {...data};
+        // console.log(newData)
+
+        // newData[e.target.id] = e.target.value;
+        // console.log(newData)
+        setData(newData);
         //console.log(getcountryId);
     }
 
     const handlestate = (e)=>{
-        const getStateid = e.target.value;
+
+        const val_arr=e.target.value.split(",")
+        const getStateid = val_arr[0];
         const getDistrictdata = state.find(state=>state.state_id===getStateid).districts;
         // console.log(getStateid);
         setDistrict(getDistrictdata);
         setStateid(getStateid);
+        data.state=val_arr[1]
+        const newData = {...data};
+        setData(newData);
     }
 
     const handledistrict = (e)=>{
-        const getDistrictid = e.target.value;
+        const val_arr=e.target.value.split(",")
+        const getDistrictid = val_arr[0];
         const getBlockdata = district.find(district=>district.district_id===getDistrictid).blocks;
 
         setBlock(getBlockdata);
         setDistrictid(getDistrictid);
+        data.district=val_arr[1]
+        const newData = {...data};
+        setData(newData);
     }
 
     const handleblock = (e)=>{
@@ -82,30 +111,34 @@ const Form = () => {
         setBlockid(getBlockid);
     }
 
-    
+// const [country, setCountry] = useState("")    
+// const handlecountry=(e)=>{
+//     console.log(e.target.value)
+//     setCountry(e.target.value)
+// }
     return(
         <form onSubmit={onSubmitHandler}>
             <h2>Change of Owner</h2>
 
             <div className={"input-field"}>
                 <label htmlFor = "country">Select Country</label>
-                <select id = "country" onSelect={(e) => handleSelect(e)} name='country' className='form-control' onChange={(e)=>handlecounty(e)}>
+                <select name='country' className='form-control' onChange={handlecounty}>
                     <option value="">--Select Country--</option>
                     {
                     countrydata.map( (getcountry,index)=>(
-                        <option value={getcountry.country_id} key={index}>{getcountry.country_name}</option> 
+                        <option id = "country" onSelect={handleSelect} value={`${getcountry.country_id},${getcountry.country_name}`} key={index}>{getcountry.country_name}</option> 
                     ))
                     }  
                 </select>
             </div>
 
-            {/* <div className={"input-field"}>
+            <div className={"input-field"}>
                 <label htmlFor = "state">Select State</label>
                 <select name='state' className='form-control' onChange={(e)=>handlestate(e)}>
                     <option value="">--Select State--</option>
                     {
                     state.map( (getstate,index)=>(
-                        <option value={getstate.state_id} key={index}>{getstate.state_name}</option> 
+                        <option id= "state" value={`${getstate.state_id},${getstate.state_name}`} key={index}>{getstate.state_name}</option> 
                     ))
                     }  
                 </select>
@@ -117,13 +150,13 @@ const Form = () => {
                     <option value="">--Select District--</option>
                     {
                     district.map( (getdistrict,index)=>(
-                        <option value={getdistrict.district_id} key={index}>{getdistrict.district_name}</option> 
+                        <option id="district" value={`${getdistrict.district_id},${getdistrict.district_name}`} key={index}>{getdistrict.district_name}</option> 
                     ))
                     }  
                 </select>
             </div>
 
-            <div className={"input-field"}>
+            {/* <div className={"input-field"}>
                 <label htmlFor = "block">Select Block</label>
                 <select id = 'block' name='block' className='form-control' onChange={(e)=>handleblock(e)}>
                     <option value="">--Select Block--</option>
