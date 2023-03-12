@@ -18,17 +18,21 @@ const Form = () => {
     const[blockid, setBlockid] = useState('');
 
     const[data, setData] = useState({
+        userid: "",
         country: "",
         state: "",
         block: "",
         land_size: "",
-        userid: "",
         owner: "",
         father_name: "",
+        
+        phone_number: "",
+
+        verifying_officer: "",
+        
         valuation: "",
         aadhar: "",
         khatiyan_number: ""
-
 
     });
 
@@ -228,6 +232,32 @@ const Form = () => {
                     type="text" 
                     placeholder="Enter Father's Name of the Owner" 
                     value = {data.father_name} 
+                    required>
+                </input>
+            </div>
+            
+            <div className={"input-field"}>
+                <label htmlFor = "phone_number">Phone Number</label>
+                <input 
+                    onChange={(e) => handleChange(e)}
+                    name="phone_number"
+                    id="phone_number"
+                    type="number" 
+                    placeholder="Enter Contact Number of the Owner" 
+                    value={data.phone_number}
+                    required>
+                </input>
+            </div>
+
+            <div className={"input-field"}>
+                <label htmlFor = "verifying_officer">Name of Verifying Officer</label>
+                <input 
+                    onChange={(e) => handleChange(e)}
+                    name="verifying_officer"
+                    id="verifying_officer"
+                    type="text" 
+                    placeholder="Enter Name of Verifying Officer" 
+                    value = {data.verifying_officer} 
                     required>
                 </input>
             </div>
