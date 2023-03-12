@@ -16,7 +16,8 @@ const Form = () => {
     const[districtid, setDistrictid] = useState('');
     const[block, setBlock]=useState([]);
     const[blockid, setBlockid] = useState('');
-
+    
+    const time = new Date().toLocaleString();
     const[data, setData] = useState({
         userid: "",
         country: "",
@@ -25,11 +26,11 @@ const Form = () => {
         land_size: "",
         owner: "",
         father_name: "",
-        
+        gender: "",
         phone_number: "",
-
+        transaction_time:time, 
         verifying_officer: "",
-        
+        transaction_type: "",
         valuation: "",
         aadhar: "",
         khatiyan_number: ""
@@ -183,6 +184,7 @@ const Form = () => {
                 </select>
             </div>
 
+
             <div className={"input-field"}>
                 <label htmlFor = "land_size">Size of the Land</label>
                 <input 
@@ -210,6 +212,7 @@ const Form = () => {
                 </input>
             </div>
 
+
             <div className={"input-field"}>
                 <label htmlFor = "owner">Name of Owner</label>
                 <input 
@@ -222,6 +225,7 @@ const Form = () => {
                     required>
                 </input>
             </div>
+
 
             <div className={"input-field"}>
                 <label htmlFor = "father_name">Father's Name of Owner</label>
@@ -236,6 +240,20 @@ const Form = () => {
                 </input>
             </div>
             
+
+            <div className={"input-field"}>
+                <label htmlFor = "gender">Gender</label>
+                <select id = 'gender' name='gender' className='form-control' onChange={(e)=>handleChange(e)}>
+                    <option value="">--Select Gender--</option>
+                    
+                    <option id = 'gender' value = "male">Male</option>
+                    <option id = 'gender' value = "female">Female</option>
+                    <option id = 'gender' value = "others">Male</option>
+                      
+                </select>
+            </div>
+
+
             <div className={"input-field"}>
                 <label htmlFor = "phone_number">Phone Number</label>
                 <input 
@@ -260,6 +278,18 @@ const Form = () => {
                     value = {data.verifying_officer} 
                     required>
                 </input>
+            </div>
+
+            <div className={"input-field"}>
+                <label htmlFor = "transaction_type">Type of Transaction</label>
+                <select id = 'transaction_type' name='transaction_type' className='form-control' onChange={(e)=>handleChange(e)}>
+                    <option value="">--Select Type of Transaction--</option>
+                    
+                    <option id = 'transaction_type' value = "Type - 1">Type - 1</option>
+                    <option id = 'transaction_type' value = "Type - 2">Type - 2</option>
+                    <option id = 'transaction_type' value = "Type - 3">Type - 3</option>
+                      
+                </select>
             </div>
 
             <div className={"input-field"}>
