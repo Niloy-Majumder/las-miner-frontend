@@ -6,7 +6,7 @@ import countrydata from "../../Countrydata.json";
 
 const Form = () => {
 
-    const url = "";
+    const url = "http://localhost:8000/api/create-block";
 
 
     const[countryid, setCountryid]=useState('');
@@ -17,23 +17,23 @@ const Form = () => {
     const[block, setBlock]=useState([]);
     const[blockid, setBlockid] = useState('');
     
-    const time = new Date().toLocaleString();
+    //const time = new Date().toLocaleString();
     const[data, setData] = useState({
         userid: "",
         country: "",
         state: "",
+        district: "",
         block: "",
-        land_size: "",
+        land_size: 0,
         owner: "",
         father_name: "",
         gender: "",
         phone_number: "",
-        transaction_time:time, 
         verifying_officer: "",
         transaction_type: "",
-        valuation: "",
+        valuation: 0,
         aadhar: "",
-        khatiyan_number: ""
+        khatiyan_number: 0
 
     });
 
@@ -58,14 +58,29 @@ const Form = () => {
 
     const onSubmitHandler = (e) => {
         e.preventDefault();
-        // axios.post(url, {
-        //     id: data.id,
-        //     owner: data.owner,
+        axios.post(url, {block: {
+            district: data.district,
+            block: data.block,
+            total_land_size: data.land_size,
+            owner_name: data.owner,
+            father_name: data.father_name,
+            gender: data.gender,
+            phone_number: data.phone_number,
+            verifying_officer: data.verifying_officer,
+            transaction_type: data.transaction_type,
+            valuation: data.valuation,
+            aadhar: data.aadhar,
+            khatiyan_number: data.khatiyan_number
             
-        // })
-        // .then(res=>{
-        //     console.log(res.data);
-        // })
+            // id: data.id,
+            // owner: data.owner,
+            
+        }}, {
+            headers: {'Content-Type': 'application/json'}
+          })
+        .then(res=>{
+            console.log(res.data);
+        })
         console.log(data);
 
     }
@@ -186,7 +201,7 @@ const Form = () => {
 
 
             <div className={"input-field"}>
-                <label htmlFor = "land_size">Size of the Land</label>
+                <label htmlFor = "land_size">Size of the Land (in Katta)</label>
                 <input 
                     onChange={(e) => handleChange(e)}
                     name="land_size"
@@ -228,7 +243,7 @@ const Form = () => {
 
 
             <div className={"input-field"}>
-                <label htmlFor = "father_name">Father's Name of Owner</label>
+                <label htmlFor = "father_name">Father's Name of the Owner</label>
                 <input 
                     onChange={(e) => handleChange(e)}
                     name="father_name"
@@ -248,7 +263,7 @@ const Form = () => {
                     
                     <option id = 'gender' value = "male">Male</option>
                     <option id = 'gender' value = "female">Female</option>
-                    <option id = 'gender' value = "others">Male</option>
+                    <option id = 'gender' value = "others">Others</option>
                       
                 </select>
             </div>
@@ -260,7 +275,7 @@ const Form = () => {
                     onChange={(e) => handleChange(e)}
                     name="phone_number"
                     id="phone_number"
-                    type="number" 
+                    type="text" 
                     placeholder="Enter Contact Number of the Owner" 
                     value={data.phone_number}
                     required>
@@ -285,9 +300,9 @@ const Form = () => {
                 <select id = 'transaction_type' name='transaction_type' className='form-control' onChange={(e)=>handleChange(e)}>
                     <option value="">--Select Type of Transaction--</option>
                     
-                    <option id = 'transaction_type' value = "Type - 1">Type - 1</option>
-                    <option id = 'transaction_type' value = "Type - 2">Type - 2</option>
-                    <option id = 'transaction_type' value = "Type - 3">Type - 3</option>
+                    <option id = 'transaction_type' value = "Online">Online</option>
+                    <option id = 'transaction_type' value = "Offline">Offline</option>
+                    <option id = 'transaction_type' value = "UPI">UPI</option>
                       
                 </select>
             </div>
@@ -311,7 +326,7 @@ const Form = () => {
                     onChange={(e) => handleChange(e)}
                     name="aadhar"
                     id="aadhar"
-                    type="number" 
+                    type="text" 
                     placeholder="Enter Aadhar Number" 
                     value={data.aadhar}
                     required>
