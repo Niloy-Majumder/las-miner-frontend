@@ -3,7 +3,7 @@ import React from "react";
 function Home() {
   return (
     <div className="home-wrapper">
-      <h1>Welcome to the Home section</h1>
+      <img src="comingSoon.avif"></img>
     </div>
   );
 }

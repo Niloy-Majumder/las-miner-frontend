@@ -1,3 +1,10 @@
 .contact-wrapper{
     min-height: 100vh;
 }
+
+.contact-wrapper img{
+    height: 100%;
+    width: 100%;
+    /* position: fixed; */
+    background-size: cover;
+}

@@ -1,3 +1,10 @@
 .faq-wrapper{
     min-height: 100vh;
 }
+
+.faq-wrapper img{
+    height: 100%;
+    width: 100%;
+    /* position: fixed; */
+    background-size: cover;
+}

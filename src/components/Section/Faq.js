@@ -3,7 +3,7 @@ import React from "react";
 function Faq() {
   return (
     <div className="faq-wrapper">
-      <h1>Welcome to the FAQ section</h1>
+      <img src="comingSoon.avif"></img>
     </div>
   );
 }

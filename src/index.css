@@ -1,4 +1,5 @@
 @import "./styles/footer.css";
+@import "./styles/sectionStyle/visualizer.css";
 @import "./styles/sectionStyle/about.css";
 @import "./styles/sectionStyle/contact.css";
 @import "./styles/sectionStyle/faq.css";

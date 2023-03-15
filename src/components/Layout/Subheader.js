@@ -4,14 +4,16 @@ import Contact from "../Section/Contact";
 import Faq from "../Section/Faq";
 import Query from "../Section/Query";
 import Body from "../body/Body";
+import ReactFlow, { ReactFlowProvider, useReactFlow } from "reactflow";
 
 import { NavLink, Routes, Route, BrowserRouter } from "react-router-dom";
+import Visualizer from "../reactFlow/Visualizer";
 
 const Subheader = () => {
   return (
     <div className="subheader-container">
       <BrowserRouter>
-        <div>
+        <div className="subheader-navbar">
           <ul>
             <li>
               <NavLink
@@ -33,6 +35,18 @@ const Subheader = () => {
                 to={"/about"}
               >
                 About
+              </NavLink>
+            </li>
+
+            <li>
+              {/* <Link to={"/product"}>Products</Link> */}
+              <NavLink
+                className={({ isActive, isPending }) =>
+                  isPending ? "pending" : isActive ? "active" : ""
+                }
+                to={"/add"}
+              >
+                Add
               </NavLink>
             </li>
 
@@ -76,8 +90,16 @@ const Subheader = () => {
           <Routes>
             {/* <Route exact path="/" /> */}
             {/* <Route path="/product" element={<Product />} /> */}
-            <Route exact path="/" element={<Body />} />
+            <Route
+              path="/"
+              element={
+                <ReactFlowProvider>
+                  <Visualizer />
+                </ReactFlowProvider>
+              }
+            />
             <Route path="/about" element={<About />} />
+            <Route path="/add" element={<Body />} />
             <Route path="/query" element={<Query />} />
             <Route path="/faq" element={<Faq />} />
             <Route path="/contact" element={<Contact />} />

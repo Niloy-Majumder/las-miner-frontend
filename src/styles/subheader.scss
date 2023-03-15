@@ -1,7 +1,11 @@
 .subheader-container {
-    position: sticky;
-    z-index: 1024;
+    margin-top: 20px ;
+    padding: 0 0;
+    z-index: 1000;
     top: 66px;
+    margin-bottom: 8rem;
+    position: sticky;
+    
     // background: #fff fixed;
     ul {
         padding: 0;
@@ -30,6 +34,10 @@
             }
         }
     }
+}
+
+.subheader-navbar{
+    
 }
 
 @media screen and (max-width:768px) {
