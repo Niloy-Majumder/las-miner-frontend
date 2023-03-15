@@ -2,7 +2,7 @@ import React from "react";
 
 function Query() {
   return (
-    <div>
+    <div className="query-wrapper">
       <h1>Welcome to the Query section</h1>
     </div>
   );

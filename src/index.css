@@ -1,6 +1,8 @@
 @import "./styles/footer.css";
-@import "./styles/nodeVisualizer.css";
-
+@import "./styles/sectionStyle/about.css";
+@import "./styles/sectionStyle/contact.css";
+@import "./styles/sectionStyle/faq.css";
+@import "./styles/sectionStyle/query.css";
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',

@@ -79,8 +79,8 @@ const Subheader = () => {
             <Route exact path="/" element={<Body />} />
             <Route path="/about" element={<About />} />
             <Route path="/query" element={<Query />} />
-            <Route path="/faq)" element={<Faq />} />
-            <Route path="/contact)" element={<Contact />} />
+            <Route path="/faq" element={<Faq />} />
+            <Route path="/contact" element={<Contact />} />
           </Routes>
         </div>
       </BrowserRouter>

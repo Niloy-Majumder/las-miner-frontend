@@ -1,0 +1,14 @@
+.about-wrapper{
+    min-height: 100vh;
+    /* background-image: url("../../../public/comingSoon.avif") top right cover no-repeat; */
+    
+}
+.about-wrapper h1{
+    color: aqua;
+}
+
+.about-wrapper img{
+    height: 100%;
+    width: 100%;
+}
+
