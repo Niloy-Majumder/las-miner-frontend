@@ -2,247 +2,272 @@ import React, { useState } from "react";
 import axios from "axios";
 import countrydata from "../../Countrydata.json";
 
-
-
 const Form = () => {
+  const url = "http://localhost:8000/api/create-block";
 
-    const url = "http://localhost:8000/api/create-block";
+  const [countryid, setCountryid] = useState("");
+  const [state, setState] = useState([]);
+  const [stateid, setStateid] = useState("");
+  const [district, setDistrict] = useState([]);
+  const [districtid, setDistrictid] = useState("");
+  const [block, setBlock] = useState([]);
+  const [blockid, setBlockid] = useState("");
 
+  //const time = new Date().toLocaleString();
+  const [data, setData] = useState({
+    vefId: "",
+    country: "",
+    state: "",
+    district: "",
+    block: "",
+    land_size: 0,
+    owner: "",
+    //father_name: "",
+    //gender: "",
+    phone_number: "",
+    //verifying_officer: "",
+    //transaction_type: "",
+    valuation: 0,
+    aadhar: "",
+    daag_number: 0,
+    prev_daag_number: 0,
+  });
 
-    const[countryid, setCountryid]=useState('');
-    const[state, setState]=useState([]);
-    const[stateid, setStateid]= useState('');
-    const[district, setDistrict]=useState([]);
-    const[districtid, setDistrictid] = useState('');
-    const[block, setBlock]=useState([]);
-    const[blockid, setBlockid] = useState('');
-    
-    //const time = new Date().toLocaleString();
-    const[data, setData] = useState({
-        userid: "",
-        country: "",
-        state: "",
-        district: "",
-        block: "",
-        land_size: 0,
-        owner: "",
-        father_name: "",
-        gender: "",
-        phone_number: "",
-        verifying_officer: "",
-        transaction_type: "",
-        valuation: 0,
-        aadhar: "",
-        khatiyan_number: 0
+  const handleSelect = (e) => {
+    // const val_arr=e.target.value.split(",")
+    // data.country=val_arr[1]
+    // console.log(data)
+    // const newData = {...data};
+    // console.log(newData)
+    // // newData[e.target.id] = e.target.value;
+    // console.log(newData)
+    // setData(newData);
+  };
 
-    });
+  const handleChange = (e) => {
+    const newdata = { ...data };
+    newdata[e.target.id] = e.target.value;
+    setData(newdata);
+    // console.log(newdata)
+  };
 
-    const handleSelect =(e) =>{
-        // const val_arr=e.target.value.split(",")
-        // data.country=val_arr[1]
-        // console.log(data)
-        // const newData = {...data};
-        // console.log(newData)
-
-        // // newData[e.target.id] = e.target.value;
-        // console.log(newData)
-        // setData(newData);
-    }
-
-    const handleChange = (e) =>{
-        const newdata = {...data};
-        newdata[e.target.id] = e.target.value;
-        setData(newdata);
-        // console.log(newdata)
-    }
-
-    const onSubmitHandler = (e) => {
-        e.preventDefault();
-        axios.post(url, {block: {
+  const onSubmitHandler = (e) => {
+    e.preventDefault();
+    axios
+      .post(
+        url,
+        {
+          block: {
+            owner: data.vefId,
             district: data.district,
-            block: data.block,
+            block_name: data.block,
             total_land_size: data.land_size,
             owner_name: data.owner,
-            father_name: data.father_name,
-            gender: data.gender,
-            phone_number: data.phone_number,
-            verifying_officer: data.verifying_officer,
-            transaction_type: data.transaction_type,
+            phone: data.phone_number,
             valuation: data.valuation,
             aadhar: data.aadhar,
-            khatiyan_number: data.khatiyan_number
-            
-            // id: data.id,
-            // owner: data.owner,
-            
-        }}, {
-            headers: {'Content-Type': 'application/json'}
-          })
-        .then(res=>{
-            console.log(res.data);
-        })
-        console.log(data);
+            daag: data.daag_number,
+            prev_daag: data.prev_daag_number,
+          },
+        },
+        {
+          headers: { "Content-Type": "application/json" },
+        }
+      )
+      .then((res) => {
+        console.log(res.data);
+      });
+    console.log(data);
+  };
 
-    }
-    
+  const handlecounty = (e) => {
+    const val_arr = e.target.value.split(",");
+    // console.log(typeof(e.target.value))
+    const getcountryId = val_arr[0];
+    // console.log(e.target.value);
+    // console.log(e.target.);
 
-    const handlecounty=(e)=>{
-        const val_arr=e.target.value.split(",")
-        // console.log(typeof(e.target.value))
-        const getcountryId = val_arr[0];
-        // console.log(e.target.value);
-        // console.log(e.target.);
-        
-        const getStatedata = countrydata.find(country=>country.country_id===getcountryId).states;
-        setState(getStatedata);
-        setCountryid(getcountryId);
-        data.country=val_arr[1]
-        // console.log(data)
-        const newData = {...data};
-        // console.log(newData)
+    const getStatedata = countrydata.find(
+      (country) => country.country_id === getcountryId
+    ).states;
+    setState(getStatedata);
+    setCountryid(getcountryId);
+    data.country = val_arr[1];
+    // console.log(data)
+    const newData = { ...data };
+    // console.log(newData)
 
-        // newData[e.target.id] = e.target.value;
-        // console.log(newData)
-        setData(newData);
-        //console.log(getcountryId);
-    }
+    // newData[e.target.id] = e.target.value;
+    // console.log(newData)
+    setData(newData);
+    //console.log(getcountryId);
+  };
 
-    const handlestate = (e)=>{
+  const handlestate = (e) => {
+    const val_arr = e.target.value.split(",");
+    const getStateid = val_arr[0];
+    const getDistrictdata = state.find(
+      (state) => state.state_id === getStateid
+    ).districts;
+    // console.log(getStateid);
+    setDistrict(getDistrictdata);
+    setStateid(getStateid);
+    data.state = val_arr[1];
+    const newData = { ...data };
+    setData(newData);
+  };
 
-        const val_arr=e.target.value.split(",")
-        const getStateid = val_arr[0];
-        const getDistrictdata = state.find(state=>state.state_id===getStateid).districts;
-        // console.log(getStateid);
-        setDistrict(getDistrictdata);
-        setStateid(getStateid);
-        data.state=val_arr[1]
-        const newData = {...data};
-        setData(newData);
-    }
+  const handledistrict = (e) => {
+    const val_arr = e.target.value.split(",");
+    const getDistrictid = val_arr[0];
+    const getBlockdata = district.find(
+      (district) => district.district_id === getDistrictid
+    ).blocks;
 
-    const handledistrict = (e)=>{
-        const val_arr=e.target.value.split(",")
-        const getDistrictid = val_arr[0];
-        const getBlockdata = district.find(district=>district.district_id===getDistrictid).blocks;
+    setBlock(getBlockdata);
+    setDistrictid(getDistrictid);
+    data.district = val_arr[1];
+    const newData = { ...data };
+    setData(newData);
+  };
 
-        setBlock(getBlockdata);
-        setDistrictid(getDistrictid);
-        data.district=val_arr[1]
-        const newData = {...data};
-        setData(newData);
-    }
+  const handleblock = (e) => {
+    const val_arr = e.target.value.split(",");
+    const getBlockid = val_arr[0];
 
-    const handleblock = (e)=>{
-        const val_arr=e.target.value.split(",")
-        const getBlockid = val_arr[0];
-        
-        setBlockid(getBlockid);
-        data.block=val_arr[1]
-        const newData = {...data};
-        setData(newData);
-    }
+    setBlockid(getBlockid);
+    data.block = val_arr[1];
+    const newData = { ...data };
+    setData(newData);
+  };
 
-// const [country, setCountry] = useState("")    
-// const handlecountry=(e)=>{
-//     console.log(e.target.value)
-//     setCountry(e.target.value)
-// }
-    return(
-        <form onSubmit={onSubmitHandler}>
-            <h2>Change of Owner</h2>
+  // const [country, setCountry] = useState("")
+  // const handlecountry=(e)=>{
+  //     console.log(e.target.value)
+  //     setCountry(e.target.value)
+  // }
+  return (
+    <form onSubmit={onSubmitHandler}>
+      <h2>Change of Owner</h2>
 
-            <div className={"input-field"}>
-                <label htmlFor = "country">Select Country</label>
-                <select name='country' className='form-control' onChange={handlecounty}>
-                    <option value="">--Select Country--</option>
-                    {
-                    countrydata.map( (getcountry,index)=>(
-                        <option id = "country" onSelect={handleSelect} value={`${getcountry.country_id},${getcountry.country_name}`} key={index}>{getcountry.country_name}</option> 
-                    ))
-                    }  
-                </select>
-            </div>
+      <div className={"input-field"}>
+        <label htmlFor="vefId">Address of Verifying Officer</label>
+        <input
+          onChange={(e) => handleChange(e)}
+          name="vefId"
+          id="vefId"
+          type="text"
+          placeholder="Enter Address of Verifying Officer"
+          value={data.vefId}
+          required
+        ></input>
+      </div>
 
-            <div className={"input-field"}>
-                <label htmlFor = "state">Select State</label>
-                <select name='state' className='form-control' onChange={(e)=>handlestate(e)}>
-                    <option value="">--Select State--</option>
-                    {
-                    state.map( (getstate,index)=>(
-                        <option id= "state" value={`${getstate.state_id},${getstate.state_name}`} key={index}>{getstate.state_name}</option> 
-                    ))
-                    }  
-                </select>
-            </div>
+      <div className={"input-field"}>
+        <label htmlFor="country">Select Country</label>
+        <select name="country" className="form-control" onChange={handlecounty}>
+          <option value="">--Select Country--</option>
+          {countrydata.map((getcountry, index) => (
+            <option
+              id="country"
+              onSelect={handleSelect}
+              value={`${getcountry.country_id},${getcountry.country_name}`}
+              key={index}
+            >
+              {getcountry.country_name}
+            </option>
+          ))}
+        </select>
+      </div>
 
-            <div className={"input-field"}>
-                <label htmlFor = "district">Select District</label>
-                <select name='district' className='form-control' onChange={(e)=>handledistrict(e)}>
-                    <option value="">--Select District--</option>
-                    {
-                    district.map( (getdistrict,index)=>(
-                        <option id="district" value={`${getdistrict.district_id},${getdistrict.district_name}`} key={index}>{getdistrict.district_name}</option> 
-                    ))
-                    }  
-                </select>
-            </div>
+      <div className={"input-field"}>
+        <label htmlFor="state">Select State</label>
+        <select
+          name="state"
+          className="form-control"
+          onChange={(e) => handlestate(e)}
+        >
+          <option value="">--Select State--</option>
+          {state.map((getstate, index) => (
+            <option
+              id="state"
+              value={`${getstate.state_id},${getstate.state_name}`}
+              key={index}
+            >
+              {getstate.state_name}
+            </option>
+          ))}
+        </select>
+      </div>
 
-            <div className={"input-field"}>
-                <label htmlFor = "block">Select Block</label>
-                <select id = 'block' name='block' className='form-control' onChange={(e)=>handleblock(e)}>
-                    <option value="">--Select Block--</option>
-                    {
-                    block.map( (getblock,index)=>(
-                        <option id= "block" value={`${getblock.block_id},${getblock.block_name}`} key={index}>{getblock.block_name}</option> 
-                    ))
-                    }  
-                </select>
-            </div>
+      <div className={"input-field"}>
+        <label htmlFor="district">Select District</label>
+        <select
+          name="district"
+          className="form-control"
+          onChange={(e) => handledistrict(e)}
+        >
+          <option value="">--Select District--</option>
+          {district.map((getdistrict, index) => (
+            <option
+              id="district"
+              value={`${getdistrict.district_id},${getdistrict.district_name}`}
+              key={index}
+            >
+              {getdistrict.district_name}
+            </option>
+          ))}
+        </select>
+      </div>
 
+      <div className={"input-field"}>
+        <label htmlFor="block">Select Block</label>
+        <select
+          id="block"
+          name="block"
+          className="form-control"
+          onChange={(e) => handleblock(e)}
+        >
+          <option value="">--Select Block--</option>
+          {block.map((getblock, index) => (
+            <option
+              id="block"
+              value={`${getblock.block_id},${getblock.block_name}`}
+              key={index}
+            >
+              {getblock.block_name}
+            </option>
+          ))}
+        </select>
+      </div>
 
-            <div className={"input-field"}>
-                <label htmlFor = "land_size">Size of the Land (in Katta)</label>
-                <input 
-                    onChange={(e) => handleChange(e)}
-                    name="land_size"
-                    id="land_size"
-                    type="number" 
-                    placeholder="Enter size of land in Katta" 
-                    value={data.land_size}
-                    required>
-                </input>
-            </div>
-            
+      <div className={"input-field"}>
+        <label htmlFor="land_size">Size of the Land (in Katta)</label>
+        <input
+          onChange={(e) => handleChange(e)}
+          name="land_size"
+          id="land_size"
+          type="number"
+          placeholder="Enter size of land in Katta"
+          value={data.land_size}
+          required
+        ></input>
+      </div>
 
-            <div className={"input-field"}>
-                <label htmlFor = "userid">User Id</label>
-                <input 
-                    onChange={(e) => handleChange(e)}
-                    name="userid"
-                    id="userid"
-                    type="text" 
-                    placeholder="Enter id" 
-                    value={data.userid}
-                    required>
-                </input>
-            </div>
+      <div className={"input-field"}>
+        <label htmlFor="owner">Name of Owner</label>
+        <input
+          onChange={(e) => handleChange(e)}
+          name="owner"
+          id="owner"
+          type="text"
+          placeholder="Enter Name of the Owner"
+          value={data.name}
+          required
+        ></input>
+      </div>
 
-
-            <div className={"input-field"}>
-                <label htmlFor = "owner">Name of Owner</label>
-                <input 
-                    onChange={(e) => handleChange(e)}
-                    name="owner"
-                    id="owner"
-                    type="text" 
-                    placeholder="Enter Name of the Owner" 
-                    value = {data.name} 
-                    required>
-                </input>
-            </div>
-
-
-            <div className={"input-field"}>
+      {/* <div className={"input-field"}>
                 <label htmlFor = "father_name">Father's Name of the Owner</label>
                 <input 
                     onChange={(e) => handleChange(e)}
@@ -253,10 +278,9 @@ const Form = () => {
                     value = {data.father_name} 
                     required>
                 </input>
-            </div>
-            
+            </div> */}
 
-            <div className={"input-field"}>
+      {/* <div className={"input-field"}>
                 <label htmlFor = "gender">Gender</label>
                 <select id = 'gender' name='gender' className='form-control' onChange={(e)=>handleChange(e)}>
                     <option value="">--Select Gender--</option>
@@ -266,23 +290,22 @@ const Form = () => {
                     <option id = 'gender' value = "others">Others</option>
                       
                 </select>
-            </div>
+            </div> */}
 
+      <div className={"input-field"}>
+        <label htmlFor="phone_number">Phone Number</label>
+        <input
+          onChange={(e) => handleChange(e)}
+          name="phone_number"
+          id="phone_number"
+          type="text"
+          placeholder="Enter Contact Number of the Owner"
+          value={data.phone_number}
+          required
+        ></input>
+      </div>
 
-            <div className={"input-field"}>
-                <label htmlFor = "phone_number">Phone Number</label>
-                <input 
-                    onChange={(e) => handleChange(e)}
-                    name="phone_number"
-                    id="phone_number"
-                    type="text" 
-                    placeholder="Enter Contact Number of the Owner" 
-                    value={data.phone_number}
-                    required>
-                </input>
-            </div>
-
-            <div className={"input-field"}>
+      {/* <div className={"input-field"}>
                 <label htmlFor = "verifying_officer">Name of Verifying Officer</label>
                 <input 
                     onChange={(e) => handleChange(e)}
@@ -293,9 +316,9 @@ const Form = () => {
                     value = {data.verifying_officer} 
                     required>
                 </input>
-            </div>
+            </div> */}
 
-            <div className={"input-field"}>
+      {/* <div className={"input-field"}>
                 <label htmlFor = "transaction_type">Type of Transaction</label>
                 <select id = 'transaction_type' name='transaction_type' className='form-control' onChange={(e)=>handleChange(e)}>
                     <option value="">--Select Type of Transaction--</option>
@@ -305,48 +328,61 @@ const Form = () => {
                     <option id = 'transaction_type' value = "UPI">UPI</option>
                       
                 </select>
-            </div>
+            </div> */}
 
-            <div className={"input-field"}>
-                <label htmlFor = "valuation">Valuation</label>
-                <input 
-                    onChange={(e) => handleChange(e)}
-                    name="valuation"
-                    id="valuation"
-                    type="number" 
-                    placeholder="Enter valuation of the land" 
-                    value={data.valuation}
-                    required>
-                </input>
-            </div>
+      <div className={"input-field"}>
+        <label htmlFor="valuation">Valuation</label>
+        <input
+          onChange={(e) => handleChange(e)}
+          name="valuation"
+          id="valuation"
+          type="number"
+          placeholder="Enter valuation of the land"
+          value={data.valuation}
+          required
+        ></input>
+      </div>
 
-            <div className={"input-field"}>
-                <label htmlFor = "aadhar">Aadhar Number</label>
-                <input 
-                    onChange={(e) => handleChange(e)}
-                    name="aadhar"
-                    id="aadhar"
-                    type="text" 
-                    placeholder="Enter Aadhar Number" 
-                    value={data.aadhar}
-                    required>
-                </input>
-            </div>
+      <div className={"input-field"}>
+        <label htmlFor="aadhar">Aadhar Number</label>
+        <input
+          onChange={(e) => handleChange(e)}
+          name="aadhar"
+          id="aadhar"
+          type="text"
+          placeholder="Enter Aadhar Number"
+          value={data.aadhar}
+          required
+        ></input>
+      </div>
 
-            <div className={"input-field"}>
-                <label htmlFor = "khatiyan_number">Khatiyan Number</label>
-                <input 
-                    onChange={(e) => handleChange(e)}
-                    name="khatiyan_number"
-                    id="khatiyan_number"
-                    type="number" 
-                    placeholder="Enter Khatiyan Number of land" 
-                    value={data.khatiyan_number}
-                    required>
-                </input>
-            </div>
+      <div className={"input-field"}>
+        <label htmlFor="daag_number">Daag Number</label>
+        <input
+          onChange={(e) => handleChange(e)}
+          name="daag_number"
+          id="daag_number"
+          type="number"
+          placeholder="Enter Daag Number of land"
+          value={data.daag_number}
+          required
+        ></input>
+      </div>
 
-            {/* <div className={"input-field"}>
+      <div className={"input-field"}>
+        <label htmlFor="prev_daag_number">Daag Number</label>
+        <input
+          onChange={(e) => handleChange(e)}
+          name="prev_daag_number"
+          id="prev_daag_number"
+          type="number"
+          placeholder="Enter Previous Daag Number of land"
+          value={data.prev_daag_number}
+          required
+        ></input>
+      </div>
+
+      {/* <div className={"input-field"}>
                 <label htmlFor = "dateOfTransaction">Date of Transaction</label>
                 <input 
                     name="dateOfTransaction"
@@ -381,12 +417,12 @@ const Form = () => {
                     required>
                 </input>
             </div> */}
-            
-            <div className={"submit-wrap"}>
-                <button>Update</button>
-            </div>
-        </form>
-    )
-}
 
-export default Form
+      <div className={"submit-wrap"}>
+        <button>Update</button>
+      </div>
+    </form>
+  );
+};
+
+export default Form;
