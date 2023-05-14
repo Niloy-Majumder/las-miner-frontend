@@ -8,3 +8,48 @@
     /* position: fixed; */
     background-size: cover;
 }
+.query-main{
+    height: 52vh;
+}
+
+.query-form-wrapper{
+
+    position: relative;
+    padding: 10px;
+    border: none;
+    border-right: 10px solid #fff;
+    outline: none;
+    width: 200px;
+    border-radius: 4px;
+    margin: auto;
+    font-size: 15px;
+    width: 20%;
+    
+
+}
+
+.form-group{
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+
+}
+
+select, input{
+    font-size: 1rem;
+    padding: 0.5rem;
+    margin-top: 2rem;
+}
+
+label{
+    font-size: 1.5rem;
+    margin-top: 2rem;
+}
+.btn{
+   padding: 0.25rem 0.5rem;
+   font-size: 1rem;
+   background-color: #E96125;
+   color: #fff;
+   font-weight: 500; 
+   margin-top: 2rem;
+}
