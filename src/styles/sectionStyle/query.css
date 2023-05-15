@@ -35,13 +35,13 @@
 
 }
 
-select, input{
+.query-form-control{
     font-size: 1rem;
     padding: 0.5rem;
     margin-top: 2rem;
 }
 
-label{
+.query-label{
     font-size: 1.5rem;
     margin-top: 2rem;
 }

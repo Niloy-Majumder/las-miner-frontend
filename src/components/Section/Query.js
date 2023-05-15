@@ -14,10 +14,10 @@ function Query() {
       <div className="query-form">
         <div className="query-form-wrapper">
           <div className="form-group">
-            <label className="heading">Select Searching Method</label>
+            <label className="query-label">Select Searching Method</label>
             <select
               name="usertype"
-              className="form-control"
+              className="query-form-control"
               onChange={(e) => handleshowhide(e)}
             >
               <option value="">--Searching Methods--</option>
@@ -28,11 +28,11 @@ function Query() {
 
           {showhide === "1" && (
             <div className="form-group">
-              <label>Aadhar Number</label>
+              <label className="query-label">Aadhar Number</label>
               <input
                 type="number"
                 name="aadhar"
-                className="form-control"
+                className="query-form-control"
                 placeholder="Enter Aadhar Number"
               ></input>
             </div>
@@ -40,11 +40,11 @@ function Query() {
 
           {showhide === "2" && (
             <div className="form-group">
-              <label>Daag Number</label>
+              <label className="query-label">Daag Number</label>
               <input
                 type="number"
                 name="daag"
-                className="form-control"
+                className="query-form-control"
                 placeholder="Enter Daag Number"
               ></input>
             </div>
