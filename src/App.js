@@ -18,13 +18,13 @@ function App() {
       setaccount(acc);
     };
     fetchAccount();
-  });
+  }, []);
 
   return (
     // <BrowserRouter>
     <div>
       <Header />
-      <Subheader />
+      <Subheader account={account} />
       {/* <Routes>  
           <Route path="/)" element={<Body />} />
           <Route path="/about)" element={<About />} />

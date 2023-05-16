@@ -6,7 +6,7 @@ import Query from "../Section/Query";
 import Body from "../body/Body";
 import { NavLink, Routes, Route, BrowserRouter } from "react-router-dom";
 
-const Subheader = () => {
+const Subheader = (props) => {
   return (
     <div className="subheader-container">
       <BrowserRouter>
@@ -17,8 +17,7 @@ const Subheader = () => {
                 className={({ isActive, isPending }) =>
                   isPending ? "pending" : isActive ? "active" : ""
                 }
-                to={"/"}
-              >
+                to={"/"}>
                 Home
               </NavLink>
             </li>
@@ -29,8 +28,7 @@ const Subheader = () => {
                 className={({ isActive, isPending }) =>
                   isPending ? "pending" : isActive ? "active" : ""
                 }
-                to={"/about"}
-              >
+                to={"/about"}>
                 About
               </NavLink>
             </li>
@@ -41,8 +39,7 @@ const Subheader = () => {
                 className={({ isActive, isPending }) =>
                   isPending ? "pending" : isActive ? "active" : ""
                 }
-                to={"/add"}
-              >
+                to={"/add"}>
                 Add
               </NavLink>
             </li>
@@ -53,8 +50,7 @@ const Subheader = () => {
                 className={({ isActive, isPending }) =>
                   isPending ? "pending" : isActive ? "active" : ""
                 }
-                to={"/query"}
-              >
+                to={"/query"}>
                 Query
               </NavLink>
             </li>
@@ -65,8 +61,7 @@ const Subheader = () => {
                 className={({ isActive, isPending }) =>
                   isPending ? "pending" : isActive ? "active" : ""
                 }
-                to={"/faq"}
-              >
+                to={"/faq"}>
                 FAQ
               </NavLink>
             </li>
@@ -77,8 +72,7 @@ const Subheader = () => {
                 className={({ isActive, isPending }) =>
                   isPending ? "pending" : isActive ? "active" : ""
                 }
-                to={"/contact"}
-              >
+                to={"/contact"}>
                 Contact
               </NavLink>
             </li>
@@ -90,7 +84,7 @@ const Subheader = () => {
             <Route path="/" element={<About />} />
             <Route path="/about" element={<About />} />
             <Route path="/add" element={<Body />} />
-            <Route path="/query" element={<Query />} />
+            <Route path="/query" element={<Query account={props.account} />} />
             <Route path="/faq" element={<Faq />} />
             <Route path="/contact" element={<Contact />} />
           </Routes>
