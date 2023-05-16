@@ -4,10 +4,7 @@ import Contact from "../Section/Contact";
 import Faq from "../Section/Faq";
 import Query from "../Section/Query";
 import Body from "../body/Body";
-import ReactFlow, { ReactFlowProvider, useReactFlow } from "reactflow";
-
 import { NavLink, Routes, Route, BrowserRouter } from "react-router-dom";
-import Visualizer from "../reactFlow/Visualizer";
 
 const Subheader = () => {
   return (
@@ -90,14 +87,7 @@ const Subheader = () => {
           <Routes>
             {/* <Route exact path="/" /> */}
             {/* <Route path="/product" element={<Product />} /> */}
-            <Route
-              path="/"
-              element={
-                <ReactFlowProvider>
-                  <Visualizer />
-                </ReactFlowProvider>
-              }
-            />
+            <Route path="/" element={<About />} />
             <Route path="/about" element={<About />} />
             <Route path="/add" element={<Body />} />
             <Route path="/query" element={<Query />} />
