@@ -7,8 +7,19 @@ import About from "./components/Section/About";
 import Query from "./components/Section/Query";
 import Faq from "./components/Section/Faq";
 import Contact from "./components/Section/Contact";
-
+import { getaccount } from "./web3/connectwallet";
+import { useEffect, useState } from "react";
 function App() {
+  const [account, setaccount] = useState("");
+
+  useEffect(() => {
+    const fetchAccount = async () => {
+      let acc = await getaccount();
+      setaccount(acc);
+    };
+    fetchAccount();
+  });
+
   return (
     // <BrowserRouter>
     <div>
