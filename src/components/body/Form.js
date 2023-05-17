@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import countrydata from "../../Countrydata.json";
+import Web3 from "web3";
+import ABI from "../../web3/ABIArray";
+import contractAddress from "../../web3/contractAddress";
 
-const Form = () => {
+const Form = (props) => {
   const url = "http://localhost:8000/api/create-block";
 
   const [countryid, setCountryid] = useState("");
@@ -12,6 +15,7 @@ const Form = () => {
   const [districtid, setDistrictid] = useState("");
   const [block, setBlock] = useState([]);
   const [blockid, setBlockid] = useState("");
+  const [web3, setWeb3] = useState("");
 
   //const time = new Date().toLocaleString();
   const [data, setData] = useState({
@@ -32,6 +36,9 @@ const Form = () => {
     daag_number: 0,
     prev_daag_number: 0,
   });
+  useEffect(() => {
+    setWeb3(new Web3(window.ethereum));
+  }, []);
 
   const handleSelect = (e) => {
     // const val_arr=e.target.value.split(",")
@@ -51,33 +58,54 @@ const Form = () => {
     // console.log(newdata)
   };
 
-  const onSubmitHandler = (e) => {
+  const onSubmitHandler = async (e) => {
     e.preventDefault();
-    axios
-      .post(
-        url,
-        {
-          block: {
-            owner: data.vefId,
-            district: data.district,
-            block_name: data.block,
-            total_land_size: data.land_size,
-            owner_name: data.owner,
-            phone: data.phone_number,
-            valuation: data.valuation,
-            aadhar: data.aadhar,
-            daag: data.daag_number,
-            prev_daag: data.prev_daag_number,
-          },
-        },
-        {
-          headers: { "Content-Type": "application/json" },
-        }
+
+    const contract = await new web3.eth.Contract(ABI, contractAddress);
+    contract.methods
+      .addLand(
+        data.aadhar,
+        data.daag_number,
+        data.prev_daag_number,
+        data.district,
+        data.block,
+        data.land_size,
+        data.owner,
+        data.phone_number,
+        data.valuation
       )
-      .then((res) => {
-        console.log(res.data);
+      .send({ from: props.address })
+      .on("receipt", function (receipt) {
+        console.log(receipt);
+      })
+      .on("error", function (error) {
+        console.error(error);
       });
-    console.log(data);
+    // axios
+    //   .post(
+    //     url,
+    //     {
+    //       block: {
+    //         owner: data.vefId,
+    //         district: data.district,
+    //         block_name: data.block,
+    //         total_land_size: data.land_size,
+    //         owner_name: data.owner,
+    //         phone: data.phone_number,
+    //         valuation: data.valuation,
+    //         aadhar: data.aadhar,
+    //         daag: data.daag_number,
+    //         prev_daag: data.prev_daag_number,
+    //       },
+    //     },
+    //     {
+    //       headers: { "Content-Type": "application/json" },
+    //     }
+    //   )
+    //   .then((res) => {
+    //     console.log(res.data);
+    //   });
+    // console.log(data);
   };
 
   const handlecounty = (e) => {
@@ -159,8 +187,7 @@ const Form = () => {
           type="text"
           placeholder="Enter Address of Verifying Officer"
           value={data.vefId}
-          required
-        ></input>
+          required></input>
       </div>
 
       <div className={"input-field"}>
@@ -172,8 +199,7 @@ const Form = () => {
               id="country"
               onSelect={handleSelect}
               value={`${getcountry.country_id},${getcountry.country_name}`}
-              key={index}
-            >
+              key={index}>
               {getcountry.country_name}
             </option>
           ))}
@@ -185,15 +211,13 @@ const Form = () => {
         <select
           name="state"
           className="form-control"
-          onChange={(e) => handlestate(e)}
-        >
+          onChange={(e) => handlestate(e)}>
           <option value="">--Select State--</option>
           {state.map((getstate, index) => (
             <option
               id="state"
               value={`${getstate.state_id},${getstate.state_name}`}
-              key={index}
-            >
+              key={index}>
               {getstate.state_name}
             </option>
           ))}
@@ -205,15 +229,13 @@ const Form = () => {
         <select
           name="district"
           className="form-control"
-          onChange={(e) => handledistrict(e)}
-        >
+          onChange={(e) => handledistrict(e)}>
           <option value="">--Select District--</option>
           {district.map((getdistrict, index) => (
             <option
               id="district"
               value={`${getdistrict.district_id},${getdistrict.district_name}`}
-              key={index}
-            >
+              key={index}>
               {getdistrict.district_name}
             </option>
           ))}
@@ -226,15 +248,13 @@ const Form = () => {
           id="block"
           name="block"
           className="form-control"
-          onChange={(e) => handleblock(e)}
-        >
+          onChange={(e) => handleblock(e)}>
           <option value="">--Select Block--</option>
           {block.map((getblock, index) => (
             <option
               id="block"
               value={`${getblock.block_id},${getblock.block_name}`}
-              key={index}
-            >
+              key={index}>
               {getblock.block_name}
             </option>
           ))}
@@ -250,8 +270,7 @@ const Form = () => {
           type="number"
           placeholder="Enter size of land in Katta"
           value={data.land_size}
-          required
-        ></input>
+          required></input>
       </div>
 
       <div className={"input-field"}>
@@ -263,8 +282,7 @@ const Form = () => {
           type="text"
           placeholder="Enter Name of the Owner"
           value={data.name}
-          required
-        ></input>
+          required></input>
       </div>
 
       {/* <div className={"input-field"}>
@@ -301,8 +319,7 @@ const Form = () => {
           type="text"
           placeholder="Enter Contact Number of the Owner"
           value={data.phone_number}
-          required
-        ></input>
+          required></input>
       </div>
 
       {/* <div className={"input-field"}>
@@ -339,8 +356,7 @@ const Form = () => {
           type="number"
           placeholder="Enter valuation of the land"
           value={data.valuation}
-          required
-        ></input>
+          required></input>
       </div>
 
       <div className={"input-field"}>
@@ -352,8 +368,7 @@ const Form = () => {
           type="text"
           placeholder="Enter Aadhar Number"
           value={data.aadhar}
-          required
-        ></input>
+          required></input>
       </div>
 
       <div className={"input-field"}>
@@ -365,8 +380,7 @@ const Form = () => {
           type="number"
           placeholder="Enter Daag Number of land"
           value={data.daag_number}
-          required
-        ></input>
+          required></input>
       </div>
 
       <div className={"input-field"}>
@@ -378,8 +392,7 @@ const Form = () => {
           type="number"
           placeholder="Enter Previous Daag Number of land"
           value={data.prev_daag_number}
-          required
-        ></input>
+          required></input>
       </div>
 
       {/* <div className={"input-field"}>

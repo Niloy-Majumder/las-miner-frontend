@@ -83,7 +83,7 @@ const Subheader = (props) => {
             {/* <Route path="/product" element={<Product />} /> */}
             <Route path="/" element={<About />} />
             <Route path="/about" element={<About />} />
-            <Route path="/add" element={<Body />} />
+            <Route path="/add" element={<Body account={props.account} />} />
             <Route path="/query" element={<Query account={props.account} />} />
             <Route path="/faq" element={<Faq />} />
             <Route path="/contact" element={<Contact />} />

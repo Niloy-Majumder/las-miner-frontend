@@ -7,21 +7,46 @@ import contractAddress from "../../web3/contractAddress";
 function Query(props) {
   const [showhide, setShowhide] = useState("");
   const [web3, setWeb3] = useState("");
+  const [daag, setDaag] = useState(0);
+  const [aadhar, setAadhar] = useState(0);
+  useEffect(() => {
+    setWeb3(new Web3(window.ethereum));
+  }, []);
 
   const handleshowhide = (event) => {
     const getuser = event.target.value;
     setShowhide(getuser);
   };
 
-  useEffect(() => {
-    setWeb3(new Web3(window.ethereum));
-  }, []);
-
-  const getlandbyDaag = async () => {
-    const contract = await new web3.eth.Contract(ABI, contractAddress);
-    let land = contract.methods.getLandFromDaag().call();
-    console.log(land);
+  const handledaagchange = (event) => {
+    const getdaag = event.target.value;
+    setDaag(getdaag);
   };
+
+  const handleaadharchange = (event) => {
+    const getadhar = event.target.value;
+    setAadhar(getadhar);
+  };
+
+  async function getlandbyDaag() {
+    const contract = await new web3.eth.Contract(ABI, contractAddress);
+    let land = await contract.methods.getLandFromDaag(daag).call();
+    if (land[1] !== "0") {
+      console.log(land);
+    } else {
+      console.log("No land Registered");
+    }
+  }
+  async function getlandbyAadhar() {
+    const contract = await new web3.eth.Contract(ABI, contractAddress);
+    let getdaag = await contract.methods.getDaagFromAadhar(aadhar).call();
+    let land = await contract.methods.getLandFromDaag(getdaag).call();
+    if (land[1] !== "0") {
+      console.log(land);
+    } else {
+      console.log("No land Registered");
+    }
+  }
 
   return (
     <div className="query-main">
@@ -46,7 +71,8 @@ function Query(props) {
                 type="number"
                 name="aadhar"
                 className="query-form-control"
-                placeholder="Enter Aadhar Number"></input>
+                placeholder="Enter Aadhar Number"
+                onChange={handleaadharchange}></input>
             </div>
           )}
 
@@ -57,10 +83,14 @@ function Query(props) {
                 type="number"
                 name="daag"
                 className="query-form-control"
-                placeholder="Enter Daag Number"></input>
+                placeholder="Enter Daag Number"
+                onChange={handledaagchange}></input>
             </div>
           )}
-          <button name="button" className="btn">
+          <button
+            name="button"
+            className="btn"
+            onClick={showhide === "2" ? getlandbyDaag : getlandbyAadhar}>
             Submit
           </button>
         </div>
