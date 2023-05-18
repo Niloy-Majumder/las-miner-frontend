@@ -1,4 +1,5 @@
 import React from "react";
+import Home from "../Section/Home";
 import About from "../Section/About";
 import Contact from "../Section/Contact";
 import Faq from "../Section/Faq";
@@ -90,7 +91,7 @@ const Subheader = (props) => {
           <Routes>
             {/* <Route exact path="/" /> */}
             {/* <Route path="/product" element={<Product />} /> */}
-            <Route path="/" element={<About />} />
+            <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/services" element={<Services />} />
             <Route path="/add" element={<Body account={props.account} />} />

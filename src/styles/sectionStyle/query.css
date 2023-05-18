@@ -1,6 +1,6 @@
-.query-wrapper{
+/* .query-wrapper{
     min-height: 100vh;
-}
+} */
 
 .query-wrapper img{
     height: 100%;
@@ -8,9 +8,9 @@
     /* position: fixed; */
     background-size: cover;
 }
-.query-main{
-    height: 52vh;
-}
+/* .query-main{
+    min-height: 60vh;
+} */
 
 .query-form-wrapper{
 
@@ -45,11 +45,13 @@
     font-size: 1.5rem;
     margin-top: 2rem;
 }
-.btn{
-   padding: 0.25rem 0.5rem;
+.query-btn{
+   padding: 0.5rem 0.5rem;
    font-size: 1rem;
    background-color: #E96125;
    color: #fff;
    font-weight: 500; 
    margin-top: 2rem;
+   border: none;
+   
 }

@@ -1,0 +1,30 @@
+table {
+    margin: 5rem auto;
+    border-radius: 1.5rem;
+    border: 1rem hidden #443C68;
+    border-collapse: collapse;
+    box-shadow: 0 0 0 1px black;
+    overflow: hidden;
+    max-width: 80rem;
+    margin-bottom: 10rem;
+  }
+  
+ td{
+    font-size: 1rem;
+    line-height: 1;
+  }
+  
+  thead {
+    font-size: 1rem;
+    background-color: #443C68;
+    color: #fff;
+  }
+  
+  th
+  {
+    border: 1px solid #443C68;
+    max-width: 30rem;
+    padding: 1.3rem;
+    line-height: 1.2;
+  }
+ 
