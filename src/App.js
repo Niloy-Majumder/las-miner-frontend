@@ -6,25 +6,13 @@ import { NavLink, Routes, Route, BrowserRouter } from "react-router-dom";
 import About from "./components/Section/About";
 import Query from "./components/Section/Query";
 import Faq from "./components/Section/Faq";
-import Contact from "./components/Section/Contact";
-import { getaccount } from "./web3/connectwallet";
-import { useEffect, useState } from "react";
+
 function App() {
-  const [account, setaccount] = useState("");
-
-  useEffect(() => {
-    const fetchAccount = async () => {
-      let acc = await getaccount();
-      setaccount(acc);
-    };
-    fetchAccount();
-  }, []);
-
   return (
     // <BrowserRouter>
     <div>
       <Header />
-      <Subheader account={account} />
+      <Subheader />
       {/* <Routes>  
           <Route path="/)" element={<Body />} />
           <Route path="/about)" element={<About />} />
