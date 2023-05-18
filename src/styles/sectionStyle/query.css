@@ -12,6 +12,10 @@
     min-height: 60vh;
 } */
 
+.query-form{
+    min-height: 120vh;
+}
+
 .query-form-wrapper{
 
     position: relative;

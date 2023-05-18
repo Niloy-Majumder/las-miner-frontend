@@ -12,6 +12,7 @@ function Query({ account, fetchAccount }) {
   const [daag, setDaag] = useState(0);
   const [aadhar, setAadhar] = useState(0);
   const [users, setUsers] = useState({});
+  const [showTable, setShowTable] = useState(0);
 
   const getAccount = async () => {
     if (account === "") {
@@ -27,6 +28,7 @@ function Query({ account, fetchAccount }) {
   const handleshowhide = (event) => {
     const getuser = event.target.value;
     setShowhide(getuser);
+    setShowTable(0);
   };
 
   const handledaagchange = (event) => {
@@ -44,6 +46,7 @@ function Query({ account, fetchAccount }) {
     let land = await contract.methods.getLandFromDaag(daag).call();
     if (land[1] !== "0") {
       setUsers(land);
+      setShowTable(1);
       // console.log(land);
     } else {
       console.log("No land Registered");
@@ -55,6 +58,7 @@ function Query({ account, fetchAccount }) {
     let land = await contract.methods.getLandFromDaag(getdaag).call();
     if (land[1] !== "0") {
       console.log(land);
+      setShowTable(1);
       setUsers(land);
     } else {
       console.log("No land Registered");
@@ -70,7 +74,8 @@ function Query({ account, fetchAccount }) {
             <select
               name="usertype"
               className="query-form-control"
-              onChange={(e) => handleshowhide(e)}>
+              onChange={(e) => handleshowhide(e)}
+            >
               <option value="">--Searching Methods--</option>
               <option value="1">Aadhar Number</option>
               <option value="2">Daag Number</option>
@@ -85,7 +90,8 @@ function Query({ account, fetchAccount }) {
                 name="aadhar"
                 className="query-form-control"
                 placeholder="Enter Aadhar Number"
-                onChange={handleaadharchange}></input>
+                onChange={handleaadharchange}
+              ></input>
             </div>
           )}
 
@@ -97,37 +103,43 @@ function Query({ account, fetchAccount }) {
                 name="daag"
                 className="query-form-control"
                 placeholder="Enter Daag Number"
-                onChange={handledaagchange}></input>
+                onChange={handledaagchange}
+              ></input>
             </div>
           )}
 
           <button
             name="button"
             className="query-btn"
-            onClick={showhide === "2" ? getlandbyDaag : getlandbyAadhar}>
+            onClick={showhide === "2" ? getlandbyDaag : getlandbyAadhar}
+          >
             Submit
           </button>
         </div>
 
-        <h1>Present Owner</h1>
-        <table>
-          <thead>
-            <tr>
-              <th>Aadhar Number</th>
-              <th>Daag Number</th>
-              <th>District</th>
-              <th>Block</th>
-              <th>Total Size of Land</th>
-              <th>Name of the Owner</th>
-              <th>Phone Number</th>
-            </tr>
-          </thead>
-          <tbody>
-            <UserData users={users} />
-          </tbody>
-        </table>
+        {showTable !== 0 && (
+          <div>
+            <h1>Present Owner</h1>
+            <table>
+              <thead>
+                <tr>
+                  <th>Aadhar Number</th>
+                  <th>Daag Number</th>
+                  <th>District</th>
+                  <th>Block</th>
+                  <th>Total Size of Land</th>
+                  <th>Name of the Owner</th>
+                  <th>Phone Number</th>
+                </tr>
+              </thead>
+              <tbody>
+                <UserData users={users} />
+              </tbody>
+            </table>
+          </div>
+        )}
 
-        <h1>Previous Owner</h1>
+        {/* <h1>Previous Owner</h1>
         <table>
           <thead>
             <tr>
@@ -140,8 +152,8 @@ function Query({ account, fetchAccount }) {
               <th>Phone Number</th>
             </tr>
           </thead>
-          <tbody>{/* <UserData users={users} /> */}</tbody>
-        </table>
+          <tbody> <UserData users={users} /> </tbody>
+        </table> */}
       </div>
     </div>
   );

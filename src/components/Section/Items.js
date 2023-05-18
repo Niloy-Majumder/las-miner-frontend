@@ -1,10 +1,4 @@
 const Items = ({ data, fetchAccount }) => {
-  // const data = {
-  //     discountedPrice:340,
-  //     price: 450,
-  //     title: "Title of the Item",
-  //     thumbnail: "dummyImage.jpeg"
-  // }
   return (
     <div className={"item-card"} onClick={fetchAccount}>
       <img className={"img-fluid"} src={`${data.thumbnail}`} alt={data.title} />
