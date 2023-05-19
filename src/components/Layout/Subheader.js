@@ -11,6 +11,8 @@ import MasterAdmin from "../Section/MasterAdmin";
 import Admin from "../Section/Admin";
 import Services from "../Section/Services";
 import { getaccount } from "../../web3/connectwallet";
+import AddAdminForm from "../Section/AddAdminForm";
+import TransferForm from "../Section/TransferForm";
 
 const Subheader = (props) => {
   const [account, setaccount] = useState("");
@@ -29,7 +31,8 @@ const Subheader = (props) => {
                 className={({ isActive, isPending }) =>
                   isPending ? "pending" : isActive ? "active" : ""
                 }
-                to={"/"}>
+                to={"/"}
+              >
                 Home
               </NavLink>
             </li>
@@ -40,7 +43,8 @@ const Subheader = (props) => {
                 className={({ isActive, isPending }) =>
                   isPending ? "pending" : isActive ? "active" : ""
                 }
-                to={"/about"}>
+                to={"/about"}
+              >
                 About
               </NavLink>
             </li>
@@ -51,7 +55,8 @@ const Subheader = (props) => {
                 className={({ isActive, isPending }) =>
                   isPending ? "pending" : isActive ? "active" : ""
                 }
-                to={"/services"}>
+                to={"/services"}
+              >
                 Services
               </NavLink>
             </li>
@@ -62,7 +67,8 @@ const Subheader = (props) => {
                 className={({ isActive, isPending }) =>
                   isPending ? "pending" : isActive ? "active" : ""
                 }
-                to={"/query"}>
+                to={"/query"}
+              >
                 Query
               </NavLink>
             </li>
@@ -73,7 +79,8 @@ const Subheader = (props) => {
                 className={({ isActive, isPending }) =>
                   isPending ? "pending" : isActive ? "active" : ""
                 }
-                to={"/faq"}>
+                to={"/faq"}
+              >
                 FAQ
               </NavLink>
             </li>
@@ -84,7 +91,8 @@ const Subheader = (props) => {
                 className={({ isActive, isPending }) =>
                   isPending ? "pending" : isActive ? "active" : ""
                 }
-                to={"/contact"}>
+                to={"/contact"}
+              >
                 Contact
               </NavLink>
             </li>
@@ -109,7 +117,9 @@ const Subheader = (props) => {
             <Route path="/faq" element={<Faq />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/masterAdmin" element={<MasterAdmin />} />
-            <Route path="/admin" element={<Admin />} />
+            <Route path="/admin" element={<Admin />} />\
+            <Route path="/addAdmin" element={<AddAdminForm />} />
+            <Route path="/transferLand" element={<TransferForm />} />
           </Routes>
         </div>
       </BrowserRouter>
