@@ -51,6 +51,7 @@ function Query({ account, fetchAccount }) {
         .getPrevTransactions(daag)
         .call();
       console.log(prevTransaction);
+      // console.log(land);
     } else {
       console.log("No land Registered");
     }

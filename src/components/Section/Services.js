@@ -7,14 +7,14 @@ const items = [
     title: "Add land details to blockchain",
     thumbnail: "landAdd.jpeg",
     details:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lobortis mattis aliquam faucibus purus in massa tempor nec",
+      "Add land details to blockchain to transform land management and create a more transparent, secure, and efficient framework for recording and managing land ownership. By leveraging blockchain technology, the project aims to overcome traditional challenges, promote trust and inclusivity, streamline processes, and enhance land governance",
   },
   {
     id: 1,
     title: "Transfer Land",
     thumbnail: "landTransfer.cms",
     details:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lobortis mattis aliquam faucibus purus in massa tempor nec.",
+      "Transfer land and update it's details to blockchain to transform land management and create a more transparent, secure, and efficient framework for recording and managing land ownership. By leveraging blockchain technology, the project aims to overcome traditional challenges, promote trust and inclusivity, streamline processes, and enhance land governance",
   },
 ];
 
