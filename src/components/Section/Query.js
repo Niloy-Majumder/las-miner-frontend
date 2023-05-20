@@ -47,7 +47,7 @@ function Query({ account, fetchAccount }) {
     if (land[1] !== "0") {
       setUsers(land);
       setShowTable(1);
-      // console.log(land);
+      console.log(land);
     } else {
       console.log("No land Registered");
     }

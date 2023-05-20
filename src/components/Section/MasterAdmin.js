@@ -7,7 +7,7 @@ const items = [
     title: "Admin Registration",
     thumbnail: "adminRegistration.jpg",
     details:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lobortis mattis aliquam faucibus purus in massa tempor nec",
+      "In a land registration system using blockchain, a master admin refers to the highest level of administrative authority within the system. The master admin typically has privileged access rights and is responsible for overseeing and managing the overall operation and configuration of the system.",
   },
 ];
 
@@ -15,7 +15,7 @@ function MasterAdmin() {
   return (
     <div className={"items-list"}>
       <div className={"items-list--wrapper"}>
-        <Items data={items[0]}></Items>
+        <Items data={items[0]} routeToGo={"/addAdmin"}></Items>
       </div>
     </div>
   );
