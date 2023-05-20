@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Container } from "react-bootstrap";
 import Web3 from "web3";
 import ABI from "../../web3/ABIArray";
 import contractAddress from "../../web3/contractAddress";
@@ -47,7 +46,11 @@ function Query({ account, fetchAccount }) {
     if (land[1] !== "0") {
       setUsers(land);
       setShowTable(1);
-      // console.log(land);
+
+      let prevTransaction = await contract.methods
+        .getPrevTransactions(daag)
+        .call();
+      console.log(prevTransaction);
     } else {
       console.log("No land Registered");
     }
@@ -57,9 +60,14 @@ function Query({ account, fetchAccount }) {
     let getdaag = await contract.methods.getDaagFromAadhar(aadhar).call();
     let land = await contract.methods.getLandFromDaag(getdaag).call();
     if (land[1] !== "0") {
-      console.log(land);
+      // console.log(land);
       setShowTable(1);
       setUsers(land);
+
+      let prevTransaction = await contract.methods
+        .getPrevTransactions(getdaag)
+        .call();
+      console.log(prevTransaction);
     } else {
       console.log("No land Registered");
     }
@@ -74,8 +82,7 @@ function Query({ account, fetchAccount }) {
             <select
               name="usertype"
               className="query-form-control"
-              onChange={(e) => handleshowhide(e)}
-            >
+              onChange={(e) => handleshowhide(e)}>
               <option value="">--Searching Methods--</option>
               <option value="1">Aadhar Number</option>
               <option value="2">Daag Number</option>
@@ -90,8 +97,7 @@ function Query({ account, fetchAccount }) {
                 name="aadhar"
                 className="query-form-control"
                 placeholder="Enter Aadhar Number"
-                onChange={handleaadharchange}
-              ></input>
+                onChange={handleaadharchange}></input>
             </div>
           )}
 
@@ -103,16 +109,14 @@ function Query({ account, fetchAccount }) {
                 name="daag"
                 className="query-form-control"
                 placeholder="Enter Daag Number"
-                onChange={handledaagchange}
-              ></input>
+                onChange={handledaagchange}></input>
             </div>
           )}
 
           <button
             name="button"
             className="query-btn"
-            onClick={showhide === "2" ? getlandbyDaag : getlandbyAadhar}
-          >
+            onClick={showhide === "2" ? getlandbyDaag : getlandbyAadhar}>
             Submit
           </button>
         </div>
