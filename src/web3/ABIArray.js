@@ -1,5 +1,10 @@
 const ABI = [
   {
+    inputs: [],
+    stateMutability: "nonpayable",
+    type: "constructor",
+  },
+  {
     inputs: [
       {
         internalType: "address",
@@ -68,40 +73,21 @@ const ABI = [
   {
     inputs: [
       {
-        internalType: "uint256",
-        name: "_aadhar",
-        type: "uint256",
-      },
-      {
-        internalType: "uint256",
-        name: "_daag",
-        type: "uint256",
-      },
-      {
-        internalType: "string",
-        name: "_owner_name",
-        type: "string",
-      },
-      {
-        internalType: "string",
-        name: "_phone",
-        type: "string",
-      },
-      {
-        internalType: "uint256",
-        name: "_valuation",
-        type: "uint256",
+        internalType: "address",
+        name: "",
+        type: "address",
       },
     ],
-    name: "transferLand",
-    outputs: [],
-    stateMutability: "nonpayable",
+    name: "administrator",
+    outputs: [
+      {
+        internalType: "bool",
+        name: "",
+        type: "bool",
+      },
+    ],
+    stateMutability: "view",
     type: "function",
-  },
-  {
-    inputs: [],
-    stateMutability: "nonpayable",
-    type: "constructor",
   },
   {
     inputs: [
@@ -169,6 +155,93 @@ const ABI = [
       },
     ],
     stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "_daag",
+        type: "uint256",
+      },
+    ],
+    name: "getPrevTransactions",
+    outputs: [
+      {
+        components: [
+          {
+            internalType: "string",
+            name: "prev_owner",
+            type: "string",
+          },
+          {
+            internalType: "string",
+            name: "new_owner",
+            type: "string",
+          },
+          {
+            internalType: "uint256",
+            name: "valuation",
+            type: "uint256",
+          },
+          {
+            internalType: "uint256",
+            name: "timestamp",
+            type: "uint256",
+          },
+        ],
+        internalType: "struct LandRegistry.Transactions[]",
+        name: "",
+        type: "tuple[]",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "owner",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "_aadhar",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "_daag",
+        type: "uint256",
+      },
+      {
+        internalType: "string",
+        name: "_owner_name",
+        type: "string",
+      },
+      {
+        internalType: "string",
+        name: "_phone",
+        type: "string",
+      },
+      {
+        internalType: "uint256",
+        name: "_valuation",
+        type: "uint256",
+      },
+    ],
+    name: "transferLand",
+    outputs: [],
+    stateMutability: "nonpayable",
     type: "function",
   },
 ];

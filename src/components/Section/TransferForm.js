@@ -20,11 +20,11 @@ const TransferForm = (props) => {
   //const time = new Date().toLocaleString();
   const [data, setData] = useState({
     vefId: "",
-    country: "",
-    state: "",
-    district: "",
-    block: "",
-    land_size: 0,
+    // country: "",
+    // state: "",
+    // district: "",
+    // block: "",
+    // land_size: 0,
     owner: "",
     //father_name: "",
     //gender: "",
@@ -34,7 +34,7 @@ const TransferForm = (props) => {
     valuation: 0,
     aadhar: "",
     daag_number: 0,
-    prev_daag_number: 0,
+    // prev_daag_number: 0,
   });
   useEffect(() => {
     setWeb3(new Web3(window.ethereum));
@@ -63,18 +63,14 @@ const TransferForm = (props) => {
 
     const contract = await new web3.eth.Contract(ABI, contractAddress);
     contract.methods
-      .addLand(
+      .transferLand(
         data.aadhar,
         data.daag_number,
-        data.prev_daag_number,
-        data.district,
-        data.block,
-        data.land_size,
         data.owner,
         data.phone_number,
         data.valuation
       )
-      .send({ from: props.address })
+      .send({ from: props.account })
       .on("receipt", function (receipt) {
         console.log(receipt);
       })
@@ -156,30 +152,30 @@ const TransferForm = (props) => {
               placeholder="Enter Address of Verifying Officer"
               value={data.vefId}
               required
-            ></input>
+              ></input>
           </div> */}
 
-          <div className={"input-field"}>
+          {/* <div className={"input-field"}>
             <label htmlFor="country">Select Country</label>
             <select
               name="country"
               className="form-control"
               onChange={handlecounty}
             >
-              <option value="">--Select Country--</option>
-              {countrydata.map((getcountry, index) => (
-                <option
-                  id="country"
-                  onSelect={handleSelect}
+            <option value="">--Select Country--</option>
+            {countrydata.map((getcountry, index) => (
+              <option
+              id="country"
+              onSelect={handleSelect}
                   value={`${getcountry.country_id},${getcountry.country_name}`}
                   key={index}
                 >
                   {getcountry.country_name}
-                </option>
+                  </option>
               ))}
-            </select>
+              </select>
           </div>
-
+          
           <div className={"input-field"}>
             <label htmlFor="state">Select State</label>
             <select
@@ -187,7 +183,7 @@ const TransferForm = (props) => {
               className="form-control"
               onChange={(e) => handlestate(e)}
             >
-              <option value="">--Select State--</option>
+            <option value="">--Select State--</option>
               {state.map((getstate, index) => (
                 <option
                   id="state"
@@ -196,29 +192,29 @@ const TransferForm = (props) => {
                 >
                   {getstate.state_name}
                 </option>
-              ))}
+                ))}
             </select>
-          </div>
-
+            </div>
+            
           <div className={"input-field"}>
             <label htmlFor="district">Select District</label>
             <select
               name="district"
               className="form-control"
               onChange={(e) => handledistrict(e)}
-            >
+              >
               <option value="">--Select District--</option>
               {district.map((getdistrict, index) => (
                 <option
                   id="district"
                   value={`${getdistrict.district_id},${getdistrict.district_name}`}
                   key={index}
-                >
+                  >
                   {getdistrict.district_name}
                 </option>
               ))}
             </select>
-          </div>
+            </div>
 
           <div className={"input-field"}>
             <label htmlFor="block">Select Block</label>
@@ -228,70 +224,31 @@ const TransferForm = (props) => {
               className="form-control"
               onChange={(e) => handleblock(e)}
             >
-              <option value="">--Select Block--</option>
+            <option value="">--Select Block--</option>
               {block.map((getblock, index) => (
                 <option
                   id="block"
                   value={`${getblock.block_id},${getblock.block_name}`}
                   key={index}
-                >
+                  >
                   {getblock.block_name}
-                </option>
-              ))}
+                  </option>
+                  ))}
             </select>
           </div>
 
           <div className={"input-field"}>
             <label htmlFor="land_size">Size of the Land (in Katta)</label>
             <input
-              onChange={(e) => handleChange(e)}
-              name="land_size"
+            onChange={(e) => handleChange(e)}
+            name="land_size"
               id="land_size"
               type="number"
               placeholder="Enter size of land in Katta"
               value={data.land_size}
               required
-            ></input>
-          </div>
-
-          <div className={"input-field"}>
-            <label htmlFor="owner">Name of Owner</label>
-            <input
-              onChange={(e) => handleChange(e)}
-              name="owner"
-              id="owner"
-              type="text"
-              placeholder="Enter Name of the Owner"
-              value={data.name}
-              required
-            ></input>
-          </div>
-
-          <div className={"input-field"}>
-            <label htmlFor="phone_number">Phone Number</label>
-            <input
-              onChange={(e) => handleChange(e)}
-              name="phone_number"
-              id="phone_number"
-              type="text"
-              placeholder="Enter Contact Number of the Owner"
-              value={data.phone_number}
-              required
-            ></input>
-          </div>
-
-          <div className={"input-field"}>
-            <label htmlFor="valuation">Valuation</label>
-            <input
-              onChange={(e) => handleChange(e)}
-              name="valuation"
-              id="valuation"
-              type="number"
-              placeholder="Enter valuation of the land"
-              value={data.valuation}
-              required
-            ></input>
-          </div>
+              ></input>
+            </div> */}
 
           <div className={"input-field"}>
             <label htmlFor="aadhar">Aadhar Number</label>
@@ -302,8 +259,7 @@ const TransferForm = (props) => {
               type="text"
               placeholder="Enter Aadhar Number"
               value={data.aadhar}
-              required
-            ></input>
+              required></input>
           </div>
 
           <div className={"input-field"}>
@@ -315,11 +271,45 @@ const TransferForm = (props) => {
               type="number"
               placeholder="Enter Daag Number of land"
               value={data.daag_number}
-              required
-            ></input>
+              required></input>
+          </div>
+          <div className={"input-field"}>
+            <label htmlFor="owner">Name of Owner</label>
+            <input
+              onChange={(e) => handleChange(e)}
+              name="owner"
+              id="owner"
+              type="text"
+              placeholder="Enter Name of the Owner"
+              value={data.name}
+              required></input>
           </div>
 
           <div className={"input-field"}>
+            <label htmlFor="phone_number">Phone Number</label>
+            <input
+              onChange={(e) => handleChange(e)}
+              name="phone_number"
+              id="phone_number"
+              type="text"
+              placeholder="Enter Contact Number of the Owner"
+              value={data.phone_number}
+              required></input>
+          </div>
+
+          <div className={"input-field"}>
+            <label htmlFor="valuation">Valuation</label>
+            <input
+              onChange={(e) => handleChange(e)}
+              name="valuation"
+              id="valuation"
+              type="number"
+              placeholder="Enter valuation of the land"
+              value={data.valuation}
+              required></input>
+          </div>
+
+          {/* <div className={"input-field"}>
             <label htmlFor="prev_daag_number">Previous Daag Number</label>
             <input
               onChange={(e) => handleChange(e)}
@@ -330,7 +320,7 @@ const TransferForm = (props) => {
               value={data.prev_daag_number}
               required
             ></input>
-          </div>
+          </div> */}
 
           <div className={"submit-wrap"}>
             <button>Update</button>

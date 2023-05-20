@@ -22,9 +22,9 @@ function Services(props) {
   return (
     <div className={"items-list"}>
       <div className={"items-list--wrapper"}>
-        <Items data={items[0]} fetchAccount={props.fetchAccount}></Items>
+        <Items data={items[0]} routeToGo={"/add"}></Items>
 
-        <Items data={items[1]} fetchAccount={props.fetchAccount}></Items>
+        <Items data={items[1]} routeToGo={"/transferLand"}></Items>
       </div>
     </div>
   );

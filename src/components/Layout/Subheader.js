@@ -31,8 +31,7 @@ const Subheader = (props) => {
                 className={({ isActive, isPending }) =>
                   isPending ? "pending" : isActive ? "active" : ""
                 }
-                to={"/"}
-              >
+                to={"/"}>
                 Home
               </NavLink>
             </li>
@@ -43,8 +42,7 @@ const Subheader = (props) => {
                 className={({ isActive, isPending }) =>
                   isPending ? "pending" : isActive ? "active" : ""
                 }
-                to={"/about"}
-              >
+                to={"/about"}>
                 About
               </NavLink>
             </li>
@@ -55,8 +53,7 @@ const Subheader = (props) => {
                 className={({ isActive, isPending }) =>
                   isPending ? "pending" : isActive ? "active" : ""
                 }
-                to={"/services"}
-              >
+                to={"/services"}>
                 Services
               </NavLink>
             </li>
@@ -67,8 +64,7 @@ const Subheader = (props) => {
                 className={({ isActive, isPending }) =>
                   isPending ? "pending" : isActive ? "active" : ""
                 }
-                to={"/query"}
-              >
+                to={"/query"}>
                 Query
               </NavLink>
             </li>
@@ -79,8 +75,7 @@ const Subheader = (props) => {
                 className={({ isActive, isPending }) =>
                   isPending ? "pending" : isActive ? "active" : ""
                 }
-                to={"/faq"}
-              >
+                to={"/faq"}>
                 FAQ
               </NavLink>
             </li>
@@ -91,8 +86,7 @@ const Subheader = (props) => {
                 className={({ isActive, isPending }) =>
                   isPending ? "pending" : isActive ? "active" : ""
                 }
-                to={"/contact"}
-              >
+                to={"/contact"}>
                 Contact
               </NavLink>
             </li>
@@ -103,12 +97,7 @@ const Subheader = (props) => {
             {/* <Route path="/product" element={<Product />} /> */}
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
-            <Route
-              path="/services"
-              element={
-                <Services account={account} fetchAccount={fetchAccount} />
-              }
-            />
+            <Route path="/services" element={<Services />} />
             <Route path="/add" element={<Body account={account} />} />
             <Route
               path="/query"
@@ -119,7 +108,10 @@ const Subheader = (props) => {
             <Route path="/masterAdmin" element={<MasterAdmin />} />
             <Route path="/admin" element={<Admin />} />\
             <Route path="/addAdmin" element={<AddAdminForm />} />
-            <Route path="/transferLand" element={<TransferForm />} />
+            <Route
+              path="/transferLand"
+              element={<TransferForm account={account} />}
+            />
           </Routes>
         </div>
       </BrowserRouter>
