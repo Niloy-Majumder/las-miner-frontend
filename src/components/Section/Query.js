@@ -4,6 +4,7 @@ import ABI from "../../web3/ABIArray";
 import contractAddress from "../../web3/contractAddress";
 import UserData from "../Section/Userdata";
 import "../../styles/sectionStyle/query.css";
+import Prevdata from "./Prevdata";
 
 function Query({ account, fetchAccount }) {
   const [showhide, setShowhide] = useState("");
@@ -12,7 +13,8 @@ function Query({ account, fetchAccount }) {
   const [aadhar, setAadhar] = useState(0);
   const [users, setUsers] = useState({});
   const [showTable, setShowTable] = useState(0);
-
+  const [prevUser, setPrevUser] = useState([]);
+  // const [showPrevTable , setShowPrevTable] = useState(0);
   const getAccount = async () => {
     if (account === "") {
       await fetchAccount();
@@ -40,6 +42,10 @@ function Query({ account, fetchAccount }) {
     setAadhar(getadhar);
   };
 
+  useEffect(() => {
+    console.log(prevUser);
+  }, [prevUser]);
+
   async function getlandbyDaag() {
     const contract = await new web3.eth.Contract(ABI, contractAddress);
     let land = await contract.methods.getLandFromDaag(daag).call();
@@ -51,7 +57,11 @@ function Query({ account, fetchAccount }) {
         .getPrevTransactions(daag)
         .call();
       console.log(prevTransaction);
-      // console.log(land);
+      await prevTransaction.map((user) => {
+        setPrevUser((prev) => {
+          return [...prev, user];
+        });
+      });
     } else {
       console.log("No land Registered");
     }
@@ -83,7 +93,8 @@ function Query({ account, fetchAccount }) {
             <select
               name="usertype"
               className="query-form-control"
-              onChange={(e) => handleshowhide(e)}>
+              onChange={(e) => handleshowhide(e)}
+            >
               <option value="">--Searching Methods--</option>
               <option value="1">Aadhar Number</option>
               <option value="2">Daag Number</option>
@@ -98,7 +109,8 @@ function Query({ account, fetchAccount }) {
                 name="aadhar"
                 className="query-form-control"
                 placeholder="Enter Aadhar Number"
-                onChange={handleaadharchange}></input>
+                onChange={handleaadharchange}
+              ></input>
             </div>
           )}
 
@@ -110,14 +122,16 @@ function Query({ account, fetchAccount }) {
                 name="daag"
                 className="query-form-control"
                 placeholder="Enter Daag Number"
-                onChange={handledaagchange}></input>
+                onChange={handledaagchange}
+              ></input>
             </div>
           )}
 
           <button
             name="button"
             className="query-btn"
-            onClick={showhide === "2" ? getlandbyDaag : getlandbyAadhar}>
+            onClick={showhide === "2" ? getlandbyDaag : getlandbyAadhar}
+          >
             Submit
           </button>
         </div>
@@ -144,21 +158,23 @@ function Query({ account, fetchAccount }) {
           </div>
         )}
 
-        {/* <h1>Previous Owner</h1>
-        <table>
-          <thead>
-            <tr>
-              <th>Aadhar Number</th>
-              <th>Daag Number</th>
-              <th>District</th>
-              <th>Block</th>
-              <th>Total Size of Land</th>
-              <th>Name of the Owner</th>
-              <th>Phone Number</th>
-            </tr>
-          </thead>
-          <tbody> <UserData users={users} /> </tbody>
-        </table> */}
+        {showTable !== 0 && (
+          <div>
+            <h1>Previous Owner</h1>
+            <table>
+              <thead>
+                <tr>
+                  <th>New Owner</th>
+                  <th>Previous Owner</th>
+                  <th>Timestamp</th>
+                  <th>Valuation</th>
+                </tr>
+              </thead>
+
+              <Prevdata prevUser={prevUser} />
+            </table>
+          </div>
+        )}
       </div>
     </div>
   );
