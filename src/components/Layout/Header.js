@@ -5,7 +5,7 @@ function Header() {
     <header>
       <div className="nav-brand">
         <a to="/">
-          <span>LASMiner</span>
+          <span>LAND-CHAIN</span>
         </a>
       </div>
     </header>

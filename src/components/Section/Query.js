@@ -93,8 +93,7 @@ function Query({ account, fetchAccount }) {
             <select
               name="usertype"
               className="query-form-control"
-              onChange={(e) => handleshowhide(e)}
-            >
+              onChange={(e) => handleshowhide(e)}>
               <option value="">--Searching Methods--</option>
               <option value="1">Aadhar Number</option>
               <option value="2">Daag Number</option>
@@ -109,8 +108,7 @@ function Query({ account, fetchAccount }) {
                 name="aadhar"
                 className="query-form-control"
                 placeholder="Enter Aadhar Number"
-                onChange={handleaadharchange}
-              ></input>
+                onChange={handleaadharchange}></input>
             </div>
           )}
 
@@ -122,16 +120,14 @@ function Query({ account, fetchAccount }) {
                 name="daag"
                 className="query-form-control"
                 placeholder="Enter Daag Number"
-                onChange={handledaagchange}
-              ></input>
+                onChange={handledaagchange}></input>
             </div>
           )}
 
           <button
             name="button"
             className="query-btn"
-            onClick={showhide === "2" ? getlandbyDaag : getlandbyAadhar}
-          >
+            onClick={showhide === "2" ? getlandbyDaag : getlandbyAadhar}>
             Submit
           </button>
         </div>
@@ -164,8 +160,8 @@ function Query({ account, fetchAccount }) {
             <table>
               <thead>
                 <tr>
-                  <th>New Owner</th>
                   <th>Previous Owner</th>
+                  <th>New Owner</th>
                   <th>Timestamp</th>
                   <th>Valuation</th>
                 </tr>
