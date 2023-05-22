@@ -29,7 +29,7 @@ const Items = ({ data, routeToGo }) => {
           <h4>{data.title}</h4>
         </div>
       </div>
-      <p>{data.details}</p>
+      <p className="home-content">{data.details}</p>
     </div>
   );
 };

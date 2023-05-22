@@ -4,7 +4,7 @@ import Items from "./Items";
 const items = [
   {
     id: 0,
-    title: "Add land details to blockchain",
+    title: "Add Land Details",
     thumbnail: "landAdd.jpeg",
     details:
       "Add land details to blockchain to transform land management and create a more transparent, secure, and efficient framework for recording and managing land ownership. By leveraging blockchain technology, the project aims to overcome traditional challenges, promote trust and inclusivity, streamline processes, and enhance land governance",

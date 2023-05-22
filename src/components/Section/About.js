@@ -47,7 +47,7 @@ function About() {
 
             <div className="col-md-4 text-center">
               <h5>Our Mission</h5>
-              <p>
+              <p className="home-content">
                 The mission of a land registration system using blockchain is to
                 create a transparent, secure, and efficient method for recording
                 and managing land ownership and related transactions. By
@@ -59,7 +59,7 @@ function About() {
 
             <div className="col-md-4 text-center">
               <h5>Our Vision</h5>
-              <p>
+              <p className="home-content">
                 The vision for a land registration system using blockchain
                 project is to create a modern, inclusive, and reliable land
                 management infrastructure that leverages the benefits of
@@ -72,7 +72,7 @@ function About() {
 
             <div className="col-md-4 text-center">
               <h5>Our Values</h5>
-              <p>
+              <p className="home-content">
                 The values for a land registration system using blockchain
                 project typically revolve around principles such as
                 transparency, security, efficiency, trust, inclusivity, and

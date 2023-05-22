@@ -34,7 +34,7 @@ const FaqItem = ({ data }) => {
               ref={contentRef}
               className={active ? `answer answer-divider` : `answer`}
             >
-              <p>{data.answer}</p>
+              <p className="home-content">{data.answer}</p>
             </div>
           </div>
         </button>

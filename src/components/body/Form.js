@@ -59,8 +59,8 @@ const Form = (props) => {
   };
 
   const onSubmitHandler = async (e) => {
-    e.preventDefault();
-
+    // e.preventDefault();
+    console.log(props.address);
     const contract = await new web3.eth.Contract(ABI, contractAddress);
     contract.methods
       .addLand(
@@ -178,19 +178,6 @@ const Form = (props) => {
     <form onSubmit={onSubmitHandler}>
       <h2>Register Your Land</h2>
 
-      {/* <div className={"input-field"}>
-        <label htmlFor="vefId">Add Land Details to Blockchain</label>
-        <input
-          onChange={(e) => handleChange(e)}
-          name="vefId"
-          id="vefId"
-          type="text"
-          placeholder="Enter Address of Verifying Officer"
-          value={data.vefId}
-          required
-        ></input>
-      </div> */}
-
       <div className={"input-field"}>
         <label htmlFor="country">Select Country</label>
         <select name="country" className="form-control" onChange={handlecounty}>
@@ -200,7 +187,8 @@ const Form = (props) => {
               id="country"
               onSelect={handleSelect}
               value={`${getcountry.country_id},${getcountry.country_name}`}
-              key={index}>
+              key={index}
+            >
               {getcountry.country_name}
             </option>
           ))}
@@ -212,13 +200,15 @@ const Form = (props) => {
         <select
           name="state"
           className="form-control"
-          onChange={(e) => handlestate(e)}>
+          onChange={(e) => handlestate(e)}
+        >
           <option value="">--Select State--</option>
           {state.map((getstate, index) => (
             <option
               id="state"
               value={`${getstate.state_id},${getstate.state_name}`}
-              key={index}>
+              key={index}
+            >
               {getstate.state_name}
             </option>
           ))}
@@ -230,13 +220,15 @@ const Form = (props) => {
         <select
           name="district"
           className="form-control"
-          onChange={(e) => handledistrict(e)}>
+          onChange={(e) => handledistrict(e)}
+        >
           <option value="">--Select District--</option>
           {district.map((getdistrict, index) => (
             <option
               id="district"
               value={`${getdistrict.district_id},${getdistrict.district_name}`}
-              key={index}>
+              key={index}
+            >
               {getdistrict.district_name}
             </option>
           ))}
@@ -249,13 +241,15 @@ const Form = (props) => {
           id="block"
           name="block"
           className="form-control"
-          onChange={(e) => handleblock(e)}>
+          onChange={(e) => handleblock(e)}
+        >
           <option value="">--Select Block--</option>
           {block.map((getblock, index) => (
             <option
               id="block"
               value={`${getblock.block_id},${getblock.block_name}`}
-              key={index}>
+              key={index}
+            >
               {getblock.block_name}
             </option>
           ))}
@@ -269,9 +263,12 @@ const Form = (props) => {
           name="land_size"
           id="land_size"
           type="number"
+          maxLength="5"
+          pattern="[1-9]{1}[0-9]{9}"
           placeholder="Enter size of land in Katta"
           value={data.land_size}
-          required></input>
+          required
+        ></input>
       </div>
 
       <div className={"input-field"}>
@@ -283,33 +280,9 @@ const Form = (props) => {
           type="text"
           placeholder="Enter Name of the Owner"
           value={data.name}
-          required></input>
+          required
+        ></input>
       </div>
-
-      {/* <div className={"input-field"}>
-                <label htmlFor = "father_name">Father's Name of the Owner</label>
-                <input 
-                    onChange={(e) => handleChange(e)}
-                    name="father_name"
-                    id="father_name"
-                    type="text" 
-                    placeholder="Enter Father's Name of the Owner" 
-                    value = {data.father_name} 
-                    required>
-                </input>
-            </div> */}
-
-      {/* <div className={"input-field"}>
-                <label htmlFor = "gender">Gender</label>
-                <select id = 'gender' name='gender' className='form-control' onChange={(e)=>handleChange(e)}>
-                    <option value="">--Select Gender--</option>
-                    
-                    <option id = 'gender' value = "male">Male</option>
-                    <option id = 'gender' value = "female">Female</option>
-                    <option id = 'gender' value = "others">Others</option>
-                      
-                </select>
-            </div> */}
 
       <div className={"input-field"}>
         <label htmlFor="phone_number">Phone Number</label>
@@ -317,36 +290,14 @@ const Form = (props) => {
           onChange={(e) => handleChange(e)}
           name="phone_number"
           id="phone_number"
-          type="text"
+          maxLength="10"
+          pattern="[1-9]{1}[0-9]{9}"
+          type="number"
           placeholder="Enter Contact Number of the Owner"
           value={data.phone_number}
-          required></input>
+          required
+        ></input>
       </div>
-
-      {/* <div className={"input-field"}>
-                <label htmlFor = "verifying_officer">Name of Verifying Officer</label>
-                <input 
-                    onChange={(e) => handleChange(e)}
-                    name="verifying_officer"
-                    id="verifying_officer"
-                    type="text" 
-                    placeholder="Enter Name of Verifying Officer" 
-                    value = {data.verifying_officer} 
-                    required>
-                </input>
-            </div> */}
-
-      {/* <div className={"input-field"}>
-                <label htmlFor = "transaction_type">Type of Transaction</label>
-                <select id = 'transaction_type' name='transaction_type' className='form-control' onChange={(e)=>handleChange(e)}>
-                    <option value="">--Select Type of Transaction--</option>
-                    
-                    <option id = 'transaction_type' value = "Online">Online</option>
-                    <option id = 'transaction_type' value = "Offline">Offline</option>
-                    <option id = 'transaction_type' value = "UPI">UPI</option>
-                      
-                </select>
-            </div> */}
 
       <div className={"input-field"}>
         <label htmlFor="valuation">Valuation</label>
@@ -355,9 +306,12 @@ const Form = (props) => {
           name="valuation"
           id="valuation"
           type="number"
+          maxLength="10"
+          pattern="[1-9]{1}[0-9]{9}"
           placeholder="Enter valuation of the land"
           value={data.valuation}
-          required></input>
+          required
+        ></input>
       </div>
 
       <div className={"input-field"}>
@@ -366,10 +320,13 @@ const Form = (props) => {
           onChange={(e) => handleChange(e)}
           name="aadhar"
           id="aadhar"
-          type="text"
+          type="number"
+          maxLength="12"
+          pattern="[1-9]{1}[0-9]{9}"
           placeholder="Enter Aadhar Number"
           value={data.aadhar}
-          required></input>
+          required
+        ></input>
       </div>
 
       <div className={"input-field"}>
@@ -381,7 +338,8 @@ const Form = (props) => {
           type="number"
           placeholder="Enter Daag Number of land"
           value={data.daag_number}
-          required></input>
+          required
+        ></input>
       </div>
 
       <div className={"input-field"}>
@@ -393,44 +351,9 @@ const Form = (props) => {
           type="number"
           placeholder="Enter Previous Daag Number of land"
           value={data.prev_daag_number}
-          required></input>
+          required
+        ></input>
       </div>
-
-      {/* <div className={"input-field"}>
-                <label htmlFor = "dateOfTransaction">Date of Transaction</label>
-                <input 
-                    name="dateOfTransaction"
-                    type="date" 
-                    placeholder="Enter Date of Transaction" 
-                    // value = {props.items.thumbnail} 
-                    // onChange={handleInput}
-                    required>
-                </input>
-            </div>
-
-            <div className={"input-field"}>
-                <label htmlFor = "typeOfTransaction">Type of Transction</label>
-                <input 
-                    name="typeOfTransaction"
-                    type="text" 
-                    placeholder="Enter Thumbnail" 
-                    // value = {props.items.thumbnail} 
-                    // onChange={handleInput}
-                    required>
-                </input>
-            </div>
-
-            <div className={"input-field"}>
-                <label htmlFor = "value">Value</label>
-                <input 
-                    name="value"
-                    type="number" 
-                    placeholder="Enter Value" 
-                    // value = {props.items.thumbnail} 
-                    // onChange={handleInput}
-                    required>
-                </input>
-            </div> */}
 
       <div className={"submit-wrap"}>
         <button>Update</button>

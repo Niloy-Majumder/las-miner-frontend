@@ -37,9 +37,10 @@
     margin-left: 8px;
   }
   
-  .question-styling {
-    font-size: 17px;
+  .question-style {
+    font-size: 16px;
     width: 100%;
+    margin: 0.5rem;
   }
   
   .question-icon {

@@ -11,7 +11,7 @@ function Home() {
           <div className="card-body">
             <h2>More About Us</h2>
           </div>
-          <p>
+          <p className="home-content">
             A land registration system using blockchain is an innovative project
             that aims to revolutionize the way land ownership is recorded,
             verified, and transferred. By leveraging the features of blockchain
