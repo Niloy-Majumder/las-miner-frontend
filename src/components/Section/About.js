@@ -4,7 +4,7 @@ import { Router } from "react-router-dom";
 
 function About() {
   return (
-    <div>
+    <div className="about-content">
       <section className="about-section">
         <div className="container">
           <div className="row">

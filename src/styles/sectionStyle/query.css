@@ -60,3 +60,14 @@
    border: none;
    
 }
+
+.query-tr{
+    border-bottom: 1px solid #000;
+}
+
+.isValid{
+    text-align: center;
+    margin: 5rem;
+    color: red;
+    font-size: 3rem;
+}

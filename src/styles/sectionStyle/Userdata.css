@@ -12,6 +12,7 @@ table {
  td{
     font-size: 1rem;
     line-height: 1;
+    text-align: center;
   }
   
   thead {
@@ -27,4 +28,10 @@ table {
     padding: 1.3rem;
     line-height: 1.2;
   }
+
+  tr{
+    border-bottom: 1px solid #000;
+  }
+
+  
  

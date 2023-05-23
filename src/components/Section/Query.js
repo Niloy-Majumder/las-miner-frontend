@@ -14,6 +14,7 @@ function Query({ account, fetchAccount }) {
   const [users, setUsers] = useState({});
   const [showTable, setShowTable] = useState(0);
   const [prevUser, setPrevUser] = useState([]);
+  const [valid, setvalid] = useState("");
   // const [showPrevTable , setShowPrevTable] = useState(0);
   const getAccount = async () => {
     if (account === "") {
@@ -30,6 +31,7 @@ function Query({ account, fetchAccount }) {
     const getuser = event.target.value;
     setShowhide(getuser);
     setShowTable(0);
+    setvalid("");
   };
 
   const handledaagchange = (event) => {
@@ -64,6 +66,7 @@ function Query({ account, fetchAccount }) {
       });
     } else {
       console.log("No land Registered");
+      setvalid("No land Registered");
     }
   }
   async function getlandbyAadhar() {
@@ -93,7 +96,8 @@ function Query({ account, fetchAccount }) {
             <select
               name="usertype"
               className="query-form-control"
-              onChange={(e) => handleshowhide(e)}>
+              onChange={(e) => handleshowhide(e)}
+            >
               <option value="">--Searching Methods--</option>
               <option value="1">Aadhar Number</option>
               <option value="2">Daag Number</option>
@@ -106,9 +110,12 @@ function Query({ account, fetchAccount }) {
               <input
                 type="number"
                 name="aadhar"
+                maxLength="12"
+                // pattern="[1-9]{1}[0-9]{9}"
                 className="query-form-control"
                 placeholder="Enter Aadhar Number"
-                onChange={handleaadharchange}></input>
+                onChange={handleaadharchange}
+              ></input>
             </div>
           )}
 
@@ -118,16 +125,20 @@ function Query({ account, fetchAccount }) {
               <input
                 type="number"
                 name="daag"
+                maxLength="10"
+                pattern="[1-9]{1}[0-9]{9}"
                 className="query-form-control"
                 placeholder="Enter Daag Number"
-                onChange={handledaagchange}></input>
+                onChange={handledaagchange}
+              ></input>
             </div>
           )}
 
           <button
             name="button"
             className="query-btn"
-            onClick={showhide === "2" ? getlandbyDaag : getlandbyAadhar}>
+            onClick={showhide === "2" ? getlandbyDaag : getlandbyAadhar}
+          >
             Submit
           </button>
         </div>
@@ -162,14 +173,18 @@ function Query({ account, fetchAccount }) {
                 <tr>
                   <th>Previous Owner</th>
                   <th>New Owner</th>
-                  <th>Timestamp</th>
                   <th>Valuation</th>
+                  <th>Timestamp</th>
                 </tr>
               </thead>
 
               <Prevdata prevUser={prevUser} />
             </table>
           </div>
+        )}
+
+        {valid === "No land Registered" && (
+          <h1 className="isValid">No Land Registered</h1>
         )}
       </div>
     </div>

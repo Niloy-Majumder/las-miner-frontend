@@ -20,20 +20,20 @@ function Footer() {
 
       <div className="footer-left">
         <p className="footer-links">
-          <a className="link-1" href="#">
+          <a className="link-1" href="/">
             Home
           </a>
 
-          <a href="#">About</a>
+          <a href="/about">About</a>
 
-          <a href="#">Query</a>
+          <a href="/query">Query</a>
 
-          <a href="#">FAQ</a>
+          <a href="/faq">FAQ</a>
 
-          <a href="#">Contact</a>
+          <a href="/contact">Contact</a>
         </p>
 
-        <p>LAS Miner &copy; 2023</p>
+        <p>LandChain &copy; 2023</p>
       </div>
     </footer>
   );

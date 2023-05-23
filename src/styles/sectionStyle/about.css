@@ -1,5 +1,5 @@
 .about-wrapper{
-    min-height: 120vh;
+    /* min-height: 120vh; */
     /* background-image: url("../../../public/comingSoon.avif") top right cover no-repeat; */
     
 }
@@ -24,4 +24,7 @@
 .home-content, .about-paragraph{
     text-align: justify ;
     margin: 1rem 1.5rem;
+}
+.about-content{
+    min-height: 100vh;
 }
