@@ -4,6 +4,7 @@ import countrydata from "../../Countrydata.json";
 import Web3 from "web3";
 import ABI from "../../web3/ABIArray";
 import contractAddress from "../../web3/contractAddress";
+import { getaccount } from "../../web3/connectwallet";
 
 const TransferForm = (props) => {
   const url = "http://localhost:8000/api/create-block";
@@ -59,8 +60,8 @@ const TransferForm = (props) => {
   };
 
   const onSubmitHandler = async (e) => {
-    // e.preventDefault();
-
+    e.preventDefault();
+    let address = await getaccount();
     const contract = await new web3.eth.Contract(ABI, contractAddress);
     contract.methods
       .transferLand(
@@ -70,7 +71,7 @@ const TransferForm = (props) => {
         data.phone_number,
         data.valuation
       )
-      .send({ from: props.account })
+      .send({ from: address })
       .on("receipt", function (receipt) {
         console.log(receipt);
       })
@@ -154,8 +155,7 @@ const TransferForm = (props) => {
               pattern="[0-9]*"
               placeholder="Enter Aadhar Number"
               value={data.aadhar}
-              required
-            ></input>
+              required></input>
           </div>
 
           <div className={"input-field"}>
@@ -169,8 +169,7 @@ const TransferForm = (props) => {
               pattern="[0-9]*"
               placeholder="Enter Daag Number of land"
               value={data.daag_number}
-              required
-            ></input>
+              required></input>
           </div>
           <div className={"input-field"}>
             <label htmlFor="owner">Name of Owner</label>
@@ -181,8 +180,7 @@ const TransferForm = (props) => {
               type="text"
               placeholder="Enter Name of the Owner"
               value={data.name}
-              required
-            ></input>
+              required></input>
           </div>
 
           <div className={"input-field"}>
@@ -196,8 +194,7 @@ const TransferForm = (props) => {
               pattern="[0-9]*"
               placeholder="Enter Contact Number of the Owner"
               value={data.phone_number}
-              required
-            ></input>
+              required></input>
           </div>
 
           <div className={"input-field"}>
@@ -211,8 +208,7 @@ const TransferForm = (props) => {
               pattern="[0-9]*"
               placeholder="Enter valuation of the land"
               value={data.valuation}
-              required
-            ></input>
+              required></input>
           </div>
 
           <div className={"submit-wrap"}>

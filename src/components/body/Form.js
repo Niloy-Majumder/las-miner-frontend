@@ -4,6 +4,7 @@ import countrydata from "../../Countrydata.json";
 import Web3 from "web3";
 import ABI from "../../web3/ABIArray";
 import contractAddress from "../../web3/contractAddress";
+import { getaccount } from "../../web3/connectwallet";
 
 const Form = (props) => {
   const url = "http://localhost:8000/api/create-block";
@@ -62,7 +63,7 @@ const Form = (props) => {
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
-    console.log(props.address);
+    let address = await getaccount();
     const contract = await new web3.eth.Contract(ABI, contractAddress);
     contract.methods
       .addLand(
@@ -76,7 +77,7 @@ const Form = (props) => {
         data.phone_number,
         data.valuation
       )
-      .send({ from: props.address })
+      .send({ from: address })
       .on("receipt", function (receipt) {
         console.log(receipt);
       })
@@ -159,8 +160,7 @@ const Form = (props) => {
               id="country"
               onSelect={handleSelect}
               value={`${getcountry.country_id},${getcountry.country_name}`}
-              key={index}
-            >
+              key={index}>
               {getcountry.country_name}
             </option>
           ))}
@@ -172,15 +172,13 @@ const Form = (props) => {
         <select
           name="state"
           className="form-control"
-          onChange={(e) => handlestate(e)}
-        >
+          onChange={(e) => handlestate(e)}>
           <option value="">--Select State--</option>
           {state.map((getstate, index) => (
             <option
               id="state"
               value={`${getstate.state_id},${getstate.state_name}`}
-              key={index}
-            >
+              key={index}>
               {getstate.state_name}
             </option>
           ))}
@@ -192,15 +190,13 @@ const Form = (props) => {
         <select
           name="district"
           className="form-control"
-          onChange={(e) => handledistrict(e)}
-        >
+          onChange={(e) => handledistrict(e)}>
           <option value="">--Select District--</option>
           {district.map((getdistrict, index) => (
             <option
               id="district"
               value={`${getdistrict.district_id},${getdistrict.district_name}`}
-              key={index}
-            >
+              key={index}>
               {getdistrict.district_name}
             </option>
           ))}
@@ -213,15 +209,13 @@ const Form = (props) => {
           id="block"
           name="block"
           className="form-control"
-          onChange={(e) => handleblock(e)}
-        >
+          onChange={(e) => handleblock(e)}>
           <option value="">--Select Block--</option>
           {block.map((getblock, index) => (
             <option
               id="block"
               value={`${getblock.block_id},${getblock.block_name}`}
-              key={index}
-            >
+              key={index}>
               {getblock.block_name}
             </option>
           ))}
@@ -239,8 +233,7 @@ const Form = (props) => {
           pattern="[0-9]*"
           placeholder="Enter size of land in Katta"
           value={data.land_size}
-          required
-        ></input>
+          required></input>
       </div>
 
       <div className={"input-field"}>
@@ -252,8 +245,7 @@ const Form = (props) => {
           type="text"
           placeholder="Enter Name of the Owner"
           value={data.name}
-          required
-        ></input>
+          required></input>
       </div>
 
       <div className={"input-field"}>
@@ -267,8 +259,7 @@ const Form = (props) => {
           pattern="[0-9]*"
           placeholder="Enter Contact Number of the Owner"
           value={data.phone_number}
-          required
-        ></input>
+          required></input>
       </div>
 
       <div className={"input-field"}>
@@ -282,8 +273,7 @@ const Form = (props) => {
           pattern="[0-9]*"
           placeholder="Enter valuation of the land"
           value={data.valuation}
-          required
-        ></input>
+          required></input>
       </div>
 
       <div className={"input-field"}>
@@ -297,8 +287,7 @@ const Form = (props) => {
           pattern="[0-9]*"
           placeholder="Enter Aadhar Number"
           value={data.aadhar}
-          required
-        ></input>
+          required></input>
       </div>
 
       <div className={"input-field"}>
@@ -312,8 +301,7 @@ const Form = (props) => {
           pattern="[0-9]*"
           placeholder="Enter Daag Number of land"
           value={data.daag_number}
-          required
-        ></input>
+          required></input>
       </div>
 
       <div className={"input-field"}>
@@ -327,8 +315,7 @@ const Form = (props) => {
           pattern="[0-9]*"
           placeholder="Enter Previous Daag Number of land"
           value={data.prev_daag_number}
-          required
-        ></input>
+          required></input>
       </div>
 
       <div className={"submit-wrap"}>
