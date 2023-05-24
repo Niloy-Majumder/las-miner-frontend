@@ -31,6 +31,7 @@ function Query({ account, fetchAccount }) {
     const getuser = event.target.value;
     setShowhide(getuser);
     setShowTable(0);
+    setPrevUser([]);
     setvalid("");
   };
 
@@ -49,6 +50,10 @@ function Query({ account, fetchAccount }) {
   }, [prevUser]);
 
   async function getlandbyDaag() {
+    setvalid("");
+    setPrevUser([]);
+    setShowTable(0);
+    // console.log(valid);
     const contract = await new web3.eth.Contract(ABI, contractAddress);
     let land = await contract.methods.getLandFromDaag(daag).call();
     if (land[1] !== "0") {
@@ -70,20 +75,28 @@ function Query({ account, fetchAccount }) {
     }
   }
   async function getlandbyAadhar() {
+    setvalid("");
+    setPrevUser([]);
+    setShowTable(0);
     const contract = await new web3.eth.Contract(ABI, contractAddress);
     let getdaag = await contract.methods.getDaagFromAadhar(aadhar).call();
     let land = await contract.methods.getLandFromDaag(getdaag).call();
     if (land[1] !== "0") {
-      // console.log(land);
-      setShowTable(1);
       setUsers(land);
+      setShowTable(1);
 
       let prevTransaction = await contract.methods
         .getPrevTransactions(getdaag)
         .call();
       console.log(prevTransaction);
+      await prevTransaction.map((user) => {
+        setPrevUser((prev) => {
+          return [...prev, user];
+        });
+      });
     } else {
       console.log("No land Registered");
+      setvalid("No land Registered");
     }
   }
 
@@ -96,8 +109,7 @@ function Query({ account, fetchAccount }) {
             <select
               name="usertype"
               className="query-form-control"
-              onChange={(e) => handleshowhide(e)}
-            >
+              onChange={(e) => handleshowhide(e)}>
               <option value="">--Searching Methods--</option>
               <option value="1">Aadhar Number</option>
               <option value="2">Daag Number</option>
@@ -114,8 +126,7 @@ function Query({ account, fetchAccount }) {
                 // pattern="[1-9]{1}[0-9]{9}"
                 className="query-form-control"
                 placeholder="Enter Aadhar Number"
-                onChange={handleaadharchange}
-              ></input>
+                onChange={handleaadharchange}></input>
             </div>
           )}
 
@@ -129,16 +140,14 @@ function Query({ account, fetchAccount }) {
                 pattern="[1-9]{1}[0-9]{9}"
                 className="query-form-control"
                 placeholder="Enter Daag Number"
-                onChange={handledaagchange}
-              ></input>
+                onChange={handledaagchange}></input>
             </div>
           )}
 
           <button
             name="button"
             className="query-btn"
-            onClick={showhide === "2" ? getlandbyDaag : getlandbyAadhar}
-          >
+            onClick={showhide === "2" ? getlandbyDaag : getlandbyAadhar}>
             Submit
           </button>
         </div>

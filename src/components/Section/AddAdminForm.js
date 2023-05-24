@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Web3 from "web3";
 import ABI from "../../web3/ABIArray";
 import contractAddress from "../../web3/contractAddress";
+import { getaccount } from "../../web3/connectwallet";
 
 const AddAdminForm = (props) => {
   const url = "http://localhost:8000/api/create-block";
@@ -21,35 +22,28 @@ const AddAdminForm = (props) => {
     // console.log(newdata);
   };
 
-  //   const onSubmitHandler = async (e) => {
-  //     e.preventDefault();
+  const onSubmitHandler = async (e) => {
+    e.preventDefault();
 
-  //     const contract = await new web3.eth.Contract(ABI, contractAddress);
-  //     contract.methods
-  //       .addLand(
-  //         data.aadhar,
-  //         data.daag_number,
-  //         data.prev_daag_number,
-  //         data.district,
-  //         data.block,
-  //         data.land_size,
-  //         data.owner,
-  //         data.phone_number,
-  //         data.valuation
-  //       )
-  //       .send({ from: props.address })
-  //       .on("receipt", function (receipt) {
-  //         console.log(receipt);
-  //       })
-  //       .on("error", function (error) {
-  //         console.error(error);
-  //       });
-  //   };
+    const contract = await new web3.eth.Contract(ABI, contractAddress);
+    console.log(data);
+    let address = data.id.toLowerCase();
+    const account = await getaccount();
+    contract.methods
+      .addAdmin(address)
+      .send({ from: account })
+      .on("receipt", function (receipt) {
+        console.log(receipt);
+      })
+      .on("error", function (error) {
+        console.error(error);
+      });
+  };
 
   return (
     <div className="form-wrapper">
       <div className={"form"}>
-        <form>
+        <form onSubmit={onSubmitHandler}>
           <h2>Add Admin</h2>
 
           <div className={"input-field"}>
@@ -61,8 +55,7 @@ const AddAdminForm = (props) => {
               type="text"
               placeholder="Enter Address of user"
               value={data.id}
-              required
-            ></input>
+              required></input>
           </div>
 
           <div className={"submit-wrap"}>

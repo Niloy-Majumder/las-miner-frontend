@@ -1,53 +1,53 @@
 .subheader-container {
-    margin-top: 20px ;
-    padding: 0 0;
-    z-index: 1000;
-    top: 66px;
-    margin-bottom: 8rem;
-    position: sticky;
-    
-    // background: #fff fixed;
+  margin-top: 20px;
+  padding: 0 0;
+  z-index: 1000;
+  top: 66px;
+  margin-bottom: 8rem;
+  position: sticky;
+
+  // background: #fff fixed;
+  ul {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    list-style: none;
+    background-color: white;
+    box-shadow: 0 15px 10px -15px #1111112b;
+    padding: 0 32px;
+    overflow-x: auto;
+    li {
+      a {
+        display: inline-block;
+        padding: 10px 16px;
+        text-decoration: none;
+        color: black;
+        font-size: 14px;
+        transition: background 100ms ease-in-out;
+        white-space: nowrap;
+
+        &.active,
+        &:hover {
+          background-color: $primary;
+          color: $white;
+        }
+      }
+    }
+  }
+}
+
+.subheader-navbar {
+}
+
+.master-admin-btn {
+  margin: 5px 0px 5px 870px;
+}
+
+@media screen and (max-width: 768px) {
+  .subheader-container {
     ul {
-        padding: 0;
-        margin: 0;
-        display: flex;
-        align-items: center;
-        list-style: none;
-        background-color: white;
-        box-shadow: 0 15px 10px -15px #1111112b;
-        padding: 0 32px;
-        overflow-x: auto;
-        li {
-            a {
-                display: inline-block;
-                padding: 10px 16px;
-                text-decoration: none;
-                color: black;
-                font-size: 14px;
-                transition: background 100ms ease-in-out;
-                white-space: nowrap;
-
-                &.active, &:hover {
-                    background-color: $primary;
-                    color: $white;
-                }
-            }
-        }
+      padding: 0 16px;
     }
-}
-
-.subheader-navbar{
-    
-}
-
-.master-admin-btn{
-    margin: 5px 0px 5px 910px;
-}
-
-@media screen and (max-width:768px) {
-    .subheader-container {
-        ul {
-            padding: 0 16px;
-        }
-    }
+  }
 }

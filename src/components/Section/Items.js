@@ -4,7 +4,7 @@ import ABI from "../../web3/ABIArray";
 import contractAddress from "../../web3/contractAddress";
 import { getaccount } from "../../web3/connectwallet";
 
-const Items = ({ data, routeToGo }) => {
+const Items = ({ data, routeToGo, masterAdmin }) => {
   const navigate = useNavigate();
 
   // Login when Admin
@@ -16,8 +16,10 @@ const Items = ({ data, routeToGo }) => {
     let isAdmin = await contract.methods.administrator(account).call();
     if (isAdmin) {
       navigate(routeToGo);
+    } else if (masterAdmin) {
+      navigate(routeToGo);
     } else {
-      console.log("Not Admin");
+      alert("Not Admin");
     }
   };
 
