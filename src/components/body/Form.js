@@ -53,13 +53,15 @@ const Form = (props) => {
 
   const handleChange = (e) => {
     const newdata = { ...data };
-    newdata[e.target.id] = e.target.value;
+    newdata[e.target.id] = e.target.validity.valid
+      ? e.target.value
+      : newdata[e.target.id];
     setData(newdata);
     // console.log(newdata)
   };
 
   const onSubmitHandler = async (e) => {
-    // e.preventDefault();
+    e.preventDefault();
     console.log(props.address);
     const contract = await new web3.eth.Contract(ABI, contractAddress);
     contract.methods
@@ -81,31 +83,6 @@ const Form = (props) => {
       .on("error", function (error) {
         console.error(error);
       });
-    // axios
-    //   .post(
-    //     url,
-    //     {
-    //       block: {
-    //         owner: data.vefId,
-    //         district: data.district,
-    //         block_name: data.block,
-    //         total_land_size: data.land_size,
-    //         owner_name: data.owner,
-    //         phone: data.phone_number,
-    //         valuation: data.valuation,
-    //         aadhar: data.aadhar,
-    //         daag: data.daag_number,
-    //         prev_daag: data.prev_daag_number,
-    //       },
-    //     },
-    //     {
-    //       headers: { "Content-Type": "application/json" },
-    //     }
-    //   )
-    //   .then((res) => {
-    //     console.log(res.data);
-    //   });
-    // console.log(data);
   };
 
   const handlecounty = (e) => {
@@ -169,11 +146,6 @@ const Form = (props) => {
     setData(newData);
   };
 
-  // const [country, setCountry] = useState("")
-  // const handlecountry=(e)=>{
-  //     console.log(e.target.value)
-  //     setCountry(e.target.value)
-  // }
   return (
     <form onSubmit={onSubmitHandler}>
       <h2>Register Your Land</h2>
@@ -262,9 +234,9 @@ const Form = (props) => {
           onChange={(e) => handleChange(e)}
           name="land_size"
           id="land_size"
-          type="number"
-          maxLength="5"
-          pattern="[1-9]{1}[0-9]{9}"
+          type="text"
+          maxLength="6"
+          pattern="[0-9]*"
           placeholder="Enter size of land in Katta"
           value={data.land_size}
           required
@@ -290,9 +262,9 @@ const Form = (props) => {
           onChange={(e) => handleChange(e)}
           name="phone_number"
           id="phone_number"
+          type="text"
           maxLength="10"
-          pattern="[1-9]{1}[0-9]{9}"
-          type="number"
+          pattern="[0-9]*"
           placeholder="Enter Contact Number of the Owner"
           value={data.phone_number}
           required
@@ -305,9 +277,9 @@ const Form = (props) => {
           onChange={(e) => handleChange(e)}
           name="valuation"
           id="valuation"
-          type="number"
-          maxLength="10"
-          pattern="[1-9]{1}[0-9]{9}"
+          type="text"
+          maxLength="9"
+          pattern="[0-9]*"
           placeholder="Enter valuation of the land"
           value={data.valuation}
           required
@@ -320,9 +292,9 @@ const Form = (props) => {
           onChange={(e) => handleChange(e)}
           name="aadhar"
           id="aadhar"
-          type="number"
+          type="text"
           maxLength="12"
-          pattern="[1-9]{1}[0-9]{9}"
+          pattern="[0-9]*"
           placeholder="Enter Aadhar Number"
           value={data.aadhar}
           required
@@ -335,7 +307,9 @@ const Form = (props) => {
           onChange={(e) => handleChange(e)}
           name="daag_number"
           id="daag_number"
-          type="number"
+          type="text"
+          maxLength="8"
+          pattern="[0-9]*"
           placeholder="Enter Daag Number of land"
           value={data.daag_number}
           required
@@ -348,7 +322,9 @@ const Form = (props) => {
           onChange={(e) => handleChange(e)}
           name="prev_daag_number"
           id="prev_daag_number"
-          type="number"
+          type="text"
+          maxLength="8"
+          pattern="[0-9]*"
           placeholder="Enter Previous Daag Number of land"
           value={data.prev_daag_number}
           required

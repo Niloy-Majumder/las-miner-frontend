@@ -55,7 +55,8 @@ const AddAdminForm = (props) => {
               type="text"
               placeholder="Enter Address of user"
               value={data.id}
-              required></input>
+              required
+            ></input>
           </div>
 
           <div className={"submit-wrap"}>

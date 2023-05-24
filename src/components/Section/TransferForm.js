@@ -150,6 +150,8 @@ const TransferForm = (props) => {
               name="aadhar"
               id="aadhar"
               type="text"
+              maxLength="12"
+              pattern="[0-9]*"
               placeholder="Enter Aadhar Number"
               value={data.aadhar}
               required
@@ -162,7 +164,9 @@ const TransferForm = (props) => {
               onChange={(e) => handleChange(e)}
               name="daag_number"
               id="daag_number"
-              type="number"
+              type="text"
+              maxLength="8"
+              pattern="[0-9]*"
               placeholder="Enter Daag Number of land"
               value={data.daag_number}
               required
@@ -187,9 +191,9 @@ const TransferForm = (props) => {
               onChange={(e) => handleChange(e)}
               name="phone_number"
               id="phone_number"
-              type="number"
-              maxlength="10"
-              pattern="[1-9]{1}[0-9]{9}"
+              type="text"
+              maxLength="10"
+              pattern="[0-9]*"
               placeholder="Enter Contact Number of the Owner"
               value={data.phone_number}
               required
@@ -202,7 +206,9 @@ const TransferForm = (props) => {
               onChange={(e) => handleChange(e)}
               name="valuation"
               id="valuation"
-              type="number"
+              type="text"
+              maxLength="9"
+              pattern="[0-9]*"
               placeholder="Enter valuation of the land"
               value={data.valuation}
               required
