@@ -17,6 +17,7 @@ const TransferForm = (props) => {
   const [block, setBlock] = useState([]);
   const [blockid, setBlockid] = useState("");
   const [web3, setWeb3] = useState("");
+  const [showAuth, setShowAuth] = useState("");
 
   //const time = new Date().toLocaleString();
   const [data, setData] = useState({
@@ -53,6 +54,7 @@ const TransferForm = (props) => {
   };
 
   const handleChange = (e) => {
+    setShowAuth("");
     const newdata = { ...data };
     newdata[e.target.id] = e.target.value;
     setData(newdata);
@@ -73,7 +75,8 @@ const TransferForm = (props) => {
       )
       .send({ from: address })
       .on("receipt", function (receipt) {
-        console.log(receipt);
+        // console.log(receipt);
+        setShowAuth(receipt.blockHash);
       })
       .on("error", function (error) {
         console.error(error);
@@ -155,7 +158,8 @@ const TransferForm = (props) => {
               pattern="[0-9]*"
               placeholder="Enter Aadhar Number"
               value={data.aadhar}
-              required></input>
+              required
+            ></input>
           </div>
 
           <div className={"input-field"}>
@@ -169,7 +173,8 @@ const TransferForm = (props) => {
               pattern="[0-9]*"
               placeholder="Enter Daag Number of land"
               value={data.daag_number}
-              required></input>
+              required
+            ></input>
           </div>
           <div className={"input-field"}>
             <label htmlFor="owner">Name of Owner</label>
@@ -180,7 +185,8 @@ const TransferForm = (props) => {
               type="text"
               placeholder="Enter Name of the Owner"
               value={data.name}
-              required></input>
+              required
+            ></input>
           </div>
 
           <div className={"input-field"}>
@@ -194,7 +200,8 @@ const TransferForm = (props) => {
               pattern="[0-9]*"
               placeholder="Enter Contact Number of the Owner"
               value={data.phone_number}
-              required></input>
+              required
+            ></input>
           </div>
 
           <div className={"input-field"}>
@@ -208,13 +215,35 @@ const TransferForm = (props) => {
               pattern="[0-9]*"
               placeholder="Enter valuation of the land"
               value={data.valuation}
-              required></input>
+              required
+            ></input>
           </div>
 
           <div className={"submit-wrap"}>
             <button>Update</button>
           </div>
         </form>
+        {showAuth !== "" && (
+          <div className="container">
+            <div className="card mt-4">
+              <div className="card-body">
+                <h2 className="form-success-msg">
+                  Your Request is Successful!!!
+                </h2>
+              </div>
+              <p className="form-success-content">
+                To Validate Your Transaction &nbsp;{" "}
+                <a
+                  className="form-success-href"
+                  href={`https://testnet.snowtrace.io/block/${showAuth}`}
+                  target="_blank"
+                >
+                  Click Here
+                </a>
+              </p>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

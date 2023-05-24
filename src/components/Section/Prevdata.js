@@ -10,11 +10,12 @@ const Prevdata = ({ prevUser }) => {
           {row.map((cell, i) =>
             i === 3 ? (
               <td key={i}>
-                {new Intl.DateTimeFormat("en-US", {
+                {cell}
+                {/* {new Intl.DateTimeFormat("en-US", {
                   year: "numeric",
                   month: "2-digit",
                   day: "2-digit",
-                }).format(cell)}
+                }).format(cell)} */}
                 {/* {moment(cell).format("YYYY-MMM-DD")} */}
               </td>
             ) : (
