@@ -41,7 +41,7 @@ function Query({ account, fetchAccount }) {
   };
 
   const handleaadharchange = (event) => {
-    const getadhar = event.target.value;
+    const getadhar = event.target.validity.valid ? event.target.value : aadhar;
     setAadhar(getadhar);
   };
 
@@ -120,13 +120,14 @@ function Query({ account, fetchAccount }) {
             <div className="form-group">
               <label className="query-label">Aadhar Number</label>
               <input
-                type="number"
+                onChange={(e) => handleaadharchange(e)}
                 name="aadhar"
+                type="text"
                 maxLength="12"
-                // pattern="[1-9]{1}[0-9]{9}"
+                pattern="[0-9]*"
+                value={aadhar}
                 className="query-form-control"
-                placeholder="Enter Aadhar Number"
-                onChange={handleaadharchange}></input>
+                placeholder="Enter Aadhar Number"></input>
             </div>
           )}
 
@@ -138,6 +139,7 @@ function Query({ account, fetchAccount }) {
                 name="daag"
                 maxLength="10"
                 pattern="[1-9]{1}[0-9]{9}"
+                value={daag}
                 className="query-form-control"
                 placeholder="Enter Daag Number"
                 onChange={handledaagchange}></input>
