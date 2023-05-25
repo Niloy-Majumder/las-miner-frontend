@@ -49,9 +49,28 @@ function MasterAdmin() {
           <Items
             data={items[0]}
             routeToGo={"/addAdmin"}
-            masterAdmin={true}></Items>
+            masterAdmin={true}
+          ></Items>
         ) : (
-          <h1>Not Master Admin</h1>
+          <div className="container">
+            <div className="card mt-4">
+              <div className="card-body">
+                <h2 className="master-admin-error">
+                  Oops! You dont have access to this page
+                </h2>
+              </div>
+              <p className="form-success-content">
+                If You Think There is an issue, Please &nbsp;{" "}
+                <a
+                  className="form-success-href"
+                  href={`/contact`}
+                  target="_blank"
+                >
+                  Contact Us
+                </a>
+              </p>
+            </div>
+          </div>
         )}
       </div>
     </div>
