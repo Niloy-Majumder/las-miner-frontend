@@ -148,7 +148,9 @@ const TransferForm = (props) => {
           <h2>Transfer of Land</h2>
 
           <div className={"input-field"}>
-            <label htmlFor="aadhar">Aadhar Number</label>
+            <label htmlFor="aadhar">
+              Aadhar Number<span className="required">*</span>
+            </label>
             <input
               onChange={(e) => handleChange(e)}
               name="aadhar"
@@ -163,7 +165,9 @@ const TransferForm = (props) => {
           </div>
 
           <div className={"input-field"}>
-            <label htmlFor="daag_number">Daag Number</label>
+            <label htmlFor="daag_number">
+              Daag Number<span className="required">*</span>
+            </label>
             <input
               onChange={(e) => handleChange(e)}
               name="daag_number"
@@ -177,7 +181,9 @@ const TransferForm = (props) => {
             ></input>
           </div>
           <div className={"input-field"}>
-            <label htmlFor="owner">Name of Owner</label>
+            <label htmlFor="owner">
+              Name of Owner<span className="required">*</span>
+            </label>
             <input
               onChange={(e) => handleChange(e)}
               name="owner"
@@ -190,7 +196,9 @@ const TransferForm = (props) => {
           </div>
 
           <div className={"input-field"}>
-            <label htmlFor="phone_number">Phone Number</label>
+            <label htmlFor="phone_number">
+              Phone Number<span className="required">*</span>
+            </label>
             <input
               onChange={(e) => handleChange(e)}
               name="phone_number"
@@ -205,7 +213,9 @@ const TransferForm = (props) => {
           </div>
 
           <div className={"input-field"}>
-            <label htmlFor="valuation">Valuation</label>
+            <label htmlFor="valuation">
+              Valuation<span className="required">*</span>
+            </label>
             <input
               onChange={(e) => handleChange(e)}
               name="valuation"

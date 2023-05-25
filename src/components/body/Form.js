@@ -155,7 +155,9 @@ const Form = (props) => {
         <h2>Register Your Land</h2>
 
         <div className={"input-field"}>
-          <label htmlFor="country">Select Country</label>
+          <label htmlFor="country">
+            Select Country<span className="required">*</span>
+          </label>
           <select
             name="country"
             className="form-control"
@@ -176,7 +178,9 @@ const Form = (props) => {
         </div>
 
         <div className={"input-field"}>
-          <label htmlFor="state">Select State</label>
+          <label htmlFor="state">
+            Select State<span className="required">*</span>
+          </label>
           <select
             name="state"
             className="form-control"
@@ -196,7 +200,9 @@ const Form = (props) => {
         </div>
 
         <div className={"input-field"}>
-          <label htmlFor="district">Select District</label>
+          <label htmlFor="district">
+            Select District<span className="required">*</span>
+          </label>
           <select
             name="district"
             className="form-control"
@@ -216,7 +222,9 @@ const Form = (props) => {
         </div>
 
         <div className={"input-field"}>
-          <label htmlFor="block">Select Block</label>
+          <label htmlFor="block">
+            Select Block<span className="required">*</span>
+          </label>
           <select
             id="block"
             name="block"
@@ -237,7 +245,9 @@ const Form = (props) => {
         </div>
 
         <div className={"input-field"}>
-          <label htmlFor="land_size">Size of the Land (in Katta)</label>
+          <label htmlFor="land_size">
+            Size of the Land (in Katta)<span className="required">*</span>
+          </label>
           <input
             onChange={(e) => handleChange(e)}
             name="land_size"
@@ -252,7 +262,9 @@ const Form = (props) => {
         </div>
 
         <div className={"input-field"}>
-          <label htmlFor="owner">Name of Owner</label>
+          <label htmlFor="owner">
+            Name of Owner<span className="required">*</span>
+          </label>
           <input
             onChange={(e) => handleChange(e)}
             name="owner"
@@ -265,7 +277,9 @@ const Form = (props) => {
         </div>
 
         <div className={"input-field"}>
-          <label htmlFor="phone_number">Phone Number</label>
+          <label htmlFor="phone_number">
+            Phone Number<span className="required">*</span>
+          </label>
           <input
             onChange={(e) => handleChange(e)}
             name="phone_number"
@@ -280,7 +294,9 @@ const Form = (props) => {
         </div>
 
         <div className={"input-field"}>
-          <label htmlFor="valuation">Valuation</label>
+          <label htmlFor="valuation">
+            Valuation<span className="required">*</span>
+          </label>
           <input
             onChange={(e) => handleChange(e)}
             name="valuation"
@@ -295,7 +311,10 @@ const Form = (props) => {
         </div>
 
         <div className={"input-field"}>
-          <label htmlFor="aadhar">Aadhar Number</label>
+          <label htmlFor="aadhar">
+            Aadhar Number<span className="required">*</span>
+          </label>
+
           <input
             onChange={(e) => handleChange(e)}
             name="aadhar"
@@ -310,7 +329,9 @@ const Form = (props) => {
         </div>
 
         <div className={"input-field"}>
-          <label htmlFor="daag_number">Daag Number</label>
+          <label htmlFor="daag_number">
+            Daag Number<span className="required">*</span>
+          </label>
           <input
             onChange={(e) => handleChange(e)}
             name="daag_number"
@@ -325,7 +346,9 @@ const Form = (props) => {
         </div>
 
         <div className={"input-field"}>
-          <label htmlFor="prev_daag_number">Previous Daag Number</label>
+          <label htmlFor="prev_daag_number">
+            Previous Daag Number<span className="required">*</span>
+          </label>
           <input
             onChange={(e) => handleChange(e)}
             name="prev_daag_number"
