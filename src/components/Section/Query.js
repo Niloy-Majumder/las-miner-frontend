@@ -109,7 +109,8 @@ function Query({ account, fetchAccount }) {
             <select
               name="usertype"
               className="query-form-control"
-              onChange={(e) => handleshowhide(e)}>
+              onChange={(e) => handleshowhide(e)}
+            >
               <option value="">--Searching Methods--</option>
               <option value="1">Aadhar Number</option>
               <option value="2">Daag Number</option>
@@ -127,7 +128,8 @@ function Query({ account, fetchAccount }) {
                 pattern="[0-9]*"
                 value={aadhar}
                 className="query-form-control"
-                placeholder="Enter Aadhar Number"></input>
+                placeholder="Enter Aadhar Number"
+              ></input>
             </div>
           )}
 
@@ -135,21 +137,23 @@ function Query({ account, fetchAccount }) {
             <div className="form-group">
               <label className="query-label">Daag Number</label>
               <input
-                type="number"
                 name="daag"
-                maxLength="10"
-                pattern="[1-9]{1}[0-9]{9}"
+                type="text"
+                maxLength="8"
+                pattern="[0-9]*"
                 value={daag}
                 className="query-form-control"
                 placeholder="Enter Daag Number"
-                onChange={handledaagchange}></input>
+                onChange={handledaagchange}
+              ></input>
             </div>
           )}
 
           <button
             name="button"
             className="query-btn"
-            onClick={showhide === "2" ? getlandbyDaag : getlandbyAadhar}>
+            onClick={showhide === "2" ? getlandbyDaag : getlandbyAadhar}
+          >
             Submit
           </button>
         </div>

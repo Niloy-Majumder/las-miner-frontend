@@ -29,9 +29,9 @@ function About() {
                 impossible for unauthorized modifications or fraudulent
                 activities to occur unnoticed.
               </p>
-              <Link to="#" className="btn btn-warning shadow">
+              {/* <Link to="#" className="btn btn-warning shadow">
                 Read More
-              </Link>
+              </Link> */}
             </div>
           </div>
         </div>
